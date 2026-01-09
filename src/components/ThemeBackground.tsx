@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function ThemeBackground() {
   const { theme } = useTheme();
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const baseUrl = import.meta.env.BASE_URL;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -20,7 +21,7 @@ export default function ThemeBackground() {
   return (
     <div className="fixed inset-0 -z-10 theme-transition">
       {theme === 'industrial' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/image.jpg)' }}>
+        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${baseUrl}image.jpg)` }}>
           <div className="absolute inset-0 bg-black/40" />
           <div className="industrial-fog" />
           <div className="industrial-fog" style={{ animationDelay: '10s', opacity: 0.5 }} />
@@ -35,11 +36,11 @@ export default function ThemeBackground() {
       )}
 
       {theme === 'psytrance' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/best-psytrance-festivals.jpg)' }} />
+        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${baseUrl}best-psytrance-festivals.jpg)` }} />
       )}
 
       {theme === 'detroit' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp)' }} />
+        <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${baseUrl}15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp)` }} />
       )}
     </div>
   );
