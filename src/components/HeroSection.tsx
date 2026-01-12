@@ -49,22 +49,22 @@ export default function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 pt-16 md:pt-24 pb-8">
       <div className="text-center mb-6 md:mb-16 animate-fadeIn">
-        <div className="mb-4 md:mb-8 leading-none">
+        <div className="mb-4 md:mb-8 leading-none logo-container">
           <h1
-            className={`text-5xl md:text-7xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition`}
-            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', fontWeight: 400 }}
+            className={`text-5xl md:text-7xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
+            style={{ fontFamily: '"Permanent Marker", cursive', letterSpacing: '0.05em', fontWeight: 400 }}
           >
             SKUT
           </h1>
           <p
-            className={`text-xl md:text-3xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition`}
-            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', marginTop: '-4px', fontWeight: 400 }}
+            className={`text-xl md:text-3xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
+            style={{ fontFamily: '"Permanent Marker", cursive', letterSpacing: '0.05em', marginTop: '-4px', fontWeight: 400 }}
           >
             APPAREL
           </p>
         </div>
-        <p className={`text-sm md:text-2xl font-light tagline-glow ${theme === 'industrial' ? 'tagline-red' : theme === 'psytrance' ? 'tagline-purple' : 'tagline-blue'}`}>
-          For Ravers by Ravers
+        <p className={`text-sm md:text-2xl ${theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue'}`}>
+          FOR RAVERS BY RAVERS
         </p>
       </div>
 

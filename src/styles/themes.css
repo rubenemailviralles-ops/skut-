@@ -171,3 +171,96 @@
     0 0 9px rgba(59, 130, 246, 0.2),
     0 0 1px rgba(59, 130, 246, 0.6);
 }
+
+/* LED Light Effect for "For Ravers by Ravers" */
+@keyframes ledBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes ledPulse {
+  0%, 100% { 
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+  50% { 
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor,
+      0 0 12px currentColor;
+  }
+}
+
+.led-light-red {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #ff0000;
+  text-shadow: 
+    0 0 5px #ff0000,
+    0 0 10px #ff0000,
+    0 0 15px #ff0000,
+    0 0 20px #ff0000,
+    0 0 30px #ff0000,
+    0 0 40px #ff0000;
+  animation: ledPulse 2s ease-in-out infinite;
+  text-transform: uppercase;
+}
+
+.led-light-purple {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #ff00ff;
+  text-shadow: 
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff,
+    0 0 15px #ff00ff,
+    0 0 20px #ff00ff,
+    0 0 30px #ff00ff,
+    0 0 40px #ff00ff;
+  animation: ledPulse 2s ease-in-out infinite;
+  text-transform: uppercase;
+}
+
+.led-light-blue {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #00ffff;
+  text-shadow: 
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 15px #00ffff,
+    0 0 20px #00ffff,
+    0 0 30px #00ffff,
+    0 0 40px #00ffff;
+  animation: ledPulse 2s ease-in-out infinite;
+  text-transform: uppercase;
+}
+
+/* Logo border/outline for visibility */
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-outline {
+  text-shadow: 
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000,
+    -3px -3px 0 #000,
+    3px -3px 0 #000,
+    -3px 3px 0 #000,
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
