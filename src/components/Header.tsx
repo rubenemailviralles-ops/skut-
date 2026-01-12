@@ -51,7 +51,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         >
           <span
             className={`text-2xl md:text-3xl tracking-wider ${colors.text} theme-transition logo-outline`}
-            style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.1em', fontWeight: 900 }}
+            style={{ fontFamily: '"Audiowide", cursive', letterSpacing: '0.08em', fontWeight: 400 }}
           >
             SKUT
           </span>
