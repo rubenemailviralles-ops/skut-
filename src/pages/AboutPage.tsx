@@ -33,9 +33,14 @@ export default function AboutPage() {
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fadeIn">
-          <h1 className={`text-5xl md:text-7xl font-black text-white mb-6 ${colors.accent}`}>
-            About SKUT
-          </h1>
+          <div className="mb-6 leading-none">
+            <h1 className={`text-5xl md:text-7xl tracking-wider ${colors.accent}`} style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', fontWeight: 400 }}>
+              SKUT
+            </h1>
+            <p className={`text-2xl md:text-4xl tracking-wider ${colors.accent}`} style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', marginTop: '-4px', fontWeight: 400 }}>
+              APPAREL
+            </p>
+          </div>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Born from the underground, crafted for the dance floor
           </p>

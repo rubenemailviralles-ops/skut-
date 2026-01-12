@@ -47,10 +47,20 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <button
           onClick={() => onNavigate('Home')}
-          className={`text-3xl md:text-4xl font-black tracking-wider ${colors.text} theme-transition hover:scale-105 transition-transform`}
-          style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '0.2em' }}
+          className="flex flex-col items-center theme-transition hover:scale-105 transition-transform leading-none"
         >
-          SKUT
+          <span
+            className={`text-2xl md:text-3xl tracking-wider ${colors.text} theme-transition`}
+            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', fontWeight: 400 }}
+          >
+            SKUT
+          </span>
+          <span
+            className={`text-[10px] md:text-xs tracking-wider ${colors.text} theme-transition`}
+            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', marginTop: '-2px', fontWeight: 400 }}
+          >
+            APPAREL
+          </span>
         </button>
 
         <nav className="hidden md:flex items-center space-x-8 relative">

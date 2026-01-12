@@ -34,8 +34,11 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className={`text-2xl font-black tracking-wider ${colors.text} mb-4`}>SKUT</h3>
-            <p className="text-gray-400 text-sm">For Ravers by Ravers</p>
+            <div className="mb-3 leading-none">
+              <h3 className={`text-2xl tracking-wider ${colors.text}`} style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', fontWeight: 400 }}>SKUT</h3>
+              <p className={`text-xs tracking-wider ${colors.text}`} style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', marginTop: '-2px', fontWeight: 400 }}>APPAREL</p>
+            </div>
+            <p className={`text-sm tagline-glow ${theme === 'industrial' ? 'tagline-red' : theme === 'psytrance' ? 'tagline-purple' : 'tagline-blue'}`}>For Ravers by Ravers</p>
           </div>
 
           <div>

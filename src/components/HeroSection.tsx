@@ -49,10 +49,21 @@ export default function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 pt-16 md:pt-24 pb-8">
       <div className="text-center mb-6 md:mb-16 animate-fadeIn">
-        <h1 className="text-4xl md:text-7xl font-black text-white mb-1 md:mb-4 tracking-wider" style={{ fontFamily: 'Impact, sans-serif' }}>
-          SKUT
-        </h1>
-        <p className="text-sm md:text-2xl text-gray-400 font-light">
+        <div className="mb-4 md:mb-8 leading-none">
+          <h1
+            className={`text-5xl md:text-7xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition`}
+            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', fontWeight: 400 }}
+          >
+            SKUT
+          </h1>
+          <p
+            className={`text-xl md:text-3xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition`}
+            style={{ fontFamily: 'Silkscreen, monospace', letterSpacing: '0.15em', marginTop: '-4px', fontWeight: 400 }}
+          >
+            APPAREL
+          </p>
+        </div>
+        <p className={`text-sm md:text-2xl font-light tagline-glow ${theme === 'industrial' ? 'tagline-red' : theme === 'psytrance' ? 'tagline-purple' : 'tagline-blue'}`}>
           For Ravers by Ravers
         </p>
       </div>
