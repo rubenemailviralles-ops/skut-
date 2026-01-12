@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'SilentBrush';
+  src:
+    url('/fonts/SilentBrush.woff2') format('woff2'),
+    url('/fonts/SilentBrush.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -250,7 +259,7 @@
 }
 
 .logo-outline {
-  text-shadow: 
+  text-shadow:
     /* Black outline for visibility */
     -2px -2px 0 #000,
     2px -2px 0 #000,
