@@ -58,7 +58,7 @@ export default function HeroSection() {
           </h1>
           <p
             className={`text-xl md:text-3xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
-            style={{ fontFamily: 'SilentBrush, "Silkscreen", system-ui', letterSpacing: '0.02em', marginTop: '-4px', fontWeight: 400 }}
+            style={{ fontFamily: '"Audiowide", cursive', letterSpacing: '0.08em', marginTop: '-4px', fontWeight: 400 }}
           >
             APPAREL
           </p>
