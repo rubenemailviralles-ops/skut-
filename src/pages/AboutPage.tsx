@@ -34,10 +34,10 @@ export default function AboutPage() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fadeIn">
           <div className="mb-6 leading-none logo-container">
-            <h1 className={`text-5xl md:text-7xl tracking-wider ${colors.accent} logo-outline`} style={{ fontFamily: '"Bungee", cursive', letterSpacing: '0.05em', fontWeight: 400 }}>
+            <h1 className={`text-5xl md:text-7xl tracking-wider ${colors.accent} logo-outline`} style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.1em', fontWeight: 900 }}>
               SKUT
             </h1>
-            <p className={`text-2xl md:text-4xl tracking-wider ${colors.accent} logo-outline`} style={{ fontFamily: '"Bungee", cursive', letterSpacing: '0.05em', marginTop: '-4px', fontWeight: 400 }}>
+            <p className={`text-2xl md:text-4xl tracking-wider ${colors.accent} logo-outline`} style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.1em', marginTop: '-4px', fontWeight: 900 }}>
               APPAREL
             </p>
           </div>
