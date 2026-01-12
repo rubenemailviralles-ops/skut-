@@ -1,8 +1,9 @@
 @font-face {
-  font-family: 'SilentBrush';
+  font-family: 'BoldMoves';
   src:
-    url('/fonts/SilentBrush.woff2') format('woff2'),
-    url('/fonts/SilentBrush.woff') format('woff');
+    url('/fonts/BoldMoves.woff2') format('woff2'),
+    url('/fonts/BoldMoves.woff') format('woff'),
+    url('/fonts/BoldMoves.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
