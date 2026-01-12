@@ -243,7 +243,7 @@
   text-transform: uppercase;
 }
 
-/* Logo border/outline for visibility */
+/* Logo border/outline for visibility with cyan glow */
 .logo-container {
   position: relative;
   display: inline-block;
@@ -251,6 +251,7 @@
 
 .logo-outline {
   text-shadow: 
+    /* Black outline for visibility */
     -2px -2px 0 #000,
     2px -2px 0 #000,
     -2px 2px 0 #000,
@@ -262,5 +263,10 @@
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
-    1px 1px 0 #000;
+    1px 1px 0 #000,
+    /* Cyan glow effect */
+    0 0 5px rgba(0, 255, 255, 0.5),
+    0 0 10px rgba(0, 255, 255, 0.4),
+    0 0 15px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 255, 0.2);
 }
