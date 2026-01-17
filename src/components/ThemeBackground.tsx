@@ -91,11 +91,10 @@ export default function ThemeBackground() {
             backgroundImage: `url(${baseUrl}${detroitUseFallback ? '15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp' : 'detroit-underground.jpg'})`,
           }}
         >
-             <div className="detroit-circuits" />
-             <div className="detroit-data-stream" />
-             <div className="detroit-scanline" />
-             <div className="detroit-wave" style={{ top: '20%' }} />
-             <div className="detroit-wave" style={{ top: '60%', animationDelay: '7s' }} />
+          <div className="detroit-overlay" />
+          <div className="detroit-grid" />
+          <div className="detroit-noise" />
+          <div className="detroit-vignette" />
         </div>
       )}
     </div>
