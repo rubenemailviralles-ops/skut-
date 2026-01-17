@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ThemeType, GenderFilter } from '../types';
 
 interface ThemeContextType {
@@ -15,6 +15,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeType>('industrial');
   const [gender, setGender] = useState<GenderFilter>('male');
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    document.body.className = `theme-${theme}`;
+  }, [theme]);
 
   const setTheme = (newTheme: ThemeType) => {
     if (newTheme === theme) return;

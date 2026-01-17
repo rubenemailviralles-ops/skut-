@@ -9,17 +9,20 @@ export default function ShopPage() {
       case 'industrial':
         return {
           accent: 'text-red-500',
-          border: 'border-red-500/30'
+          border: 'border-red-500/30',
+          card: 'hover:border-red-500 hover:[animation:glitch-anim_0.3s_ease-in-out_infinite]'
         };
       case 'psytrance':
         return {
           accent: 'text-purple-400',
-          border: 'border-purple-500/30'
+          border: 'border-purple-500/30',
+          card: 'hover:border-purple-500 hover:shadow-[0_0_30px_rgba(192,38,211,0.4)] transition-all duration-700'
         };
       case 'detroit':
         return {
           accent: 'text-blue-400',
-          border: 'border-blue-500/30'
+          border: 'border-blue-500/30',
+          card: 'hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300'
         };
     }
   };
@@ -62,7 +65,7 @@ export default function ShopPage() {
       </div>
 
       <div className="container mx-auto px-4 mt-16">
-        <div className={`bg-black/50 backdrop-blur-sm border ${colors.border} rounded-lg p-12 text-center`}>
+        <div className={`bg-black/50 backdrop-blur-sm border ${colors.border} ${colors.card} rounded-lg p-12 text-center`}>
           <h2 className={`text-3xl font-bold text-white mb-4 ${colors.accent}`}>
             Coming Soon
           </h2>

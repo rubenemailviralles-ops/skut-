@@ -17,21 +17,21 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
         return {
           accent: 'border-red-500',
           text: 'text-red-400',
-          hover: 'hover:border-red-400',
+          hover: 'hover:border-red-400 hover:[animation:glitch-anim_0.3s_ease-in-out_infinite]',
           bg: 'bg-red-950/20'
         };
       case 'psytrance':
         return {
           accent: 'border-purple-500',
           text: 'text-purple-400',
-          hover: 'hover:border-purple-400',
+          hover: 'hover:border-purple-400 hover:scale-105 hover:shadow-[0_0_30px_rgba(192,38,211,0.6)] duration-700 ease-in-out',
           bg: 'bg-purple-950/20'
         };
       case 'detroit':
         return {
           accent: 'border-blue-500',
           text: 'text-blue-400',
-          hover: 'hover:border-blue-400',
+          hover: 'hover:border-cyan-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] duration-300',
           bg: 'bg-blue-950/20'
         };
     }
