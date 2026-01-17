@@ -428,6 +428,12 @@ body.theme-detroit {
     0 0 34px currentColor;
 }
 
+.led-icon {
+  filter:
+    drop-shadow(0 0 6px currentColor)
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.15));
+}
+
 /* Logo border/outline for visibility with cyan glow */
 .logo-container {
   position: relative;

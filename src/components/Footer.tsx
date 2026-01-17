@@ -63,7 +63,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className={`${colors.text} ${colors.hover} border ${colors.border} rounded px-6 py-2 text-sm font-medium transition-colors`}
+                className={`${ledClass} led-border border-2 border-current bg-black/40 rounded px-6 py-2 text-sm transition-all duration-300 hover:scale-105`}
               >
                 Subscribe
               </button>
@@ -76,7 +76,7 @@ export default function Footer() {
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, idx) => (
                 <button
                   key={idx}
-                  className={`${colors.text} ${colors.hover} transition-colors`}
+                  className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110`}
                 >
                   <Icon className="w-5 h-5" />
                 </button>

@@ -10,6 +10,7 @@ interface ProductCarouselProps {
 export default function ProductCarousel({ category, itemCount = 6 }: ProductCarouselProps) {
   const { theme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
 
   const getThemeColors = () => {
     switch (theme) {
@@ -53,7 +54,7 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
     <section className="py-12 px-4">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className={`text-3xl md:text-4xl font-bold text-white tracking-wide ${colors.text}`}>
+          <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass}`}>
             {category}
           </h2>
           <div className="flex space-x-2">
