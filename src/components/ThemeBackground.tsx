@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function ThemeBackground() {
   const { theme } = useTheme();
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [psytranceUseFallback, setPsytranceUseFallback] = useState(false);
   const baseUrl = import.meta.env.BASE_URL;
 
   useEffect(() => {
@@ -17,6 +18,10 @@ export default function ThemeBackground() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  useEffect(() => {
+    if (theme === 'psytrance') setPsytranceUseFallback(false);
+  }, [theme]);
 
   return (
     <div className="fixed inset-0 -z-10 theme-transition">
@@ -38,11 +43,17 @@ export default function ThemeBackground() {
       )}
 
       {theme === 'psytrance' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat psytrance-bg" style={{ backgroundImage: `url(${baseUrl}best-psytrance-festivals.jpg)` }}>
-             <div className="psytrance-mandala" />
-             <div className="psytrance-vortex" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
-             <div className="psytrance-liquid" style={{ top: '20%', left: '20%' }} />
-             <div className="psytrance-liquid" style={{ bottom: '20%', right: '20%', animationDelay: '4s' }} />
+        <div className="w-full h-full bg-cover bg-center bg-no-repeat psytrance-bg">
+          <img
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            src={`${baseUrl}${psytranceUseFallback ? 'best-psytrance-festivals.jpg' : 'psytrance-stage.jpg'}`}
+            onError={() => setPsytranceUseFallback(true)}
+            alt=""
+          />
+          <div className="psytrance-mandala" />
+          <div className="psytrance-vortex" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+          <div className="psytrance-liquid" style={{ top: '20%', left: '20%' }} />
+          <div className="psytrance-liquid" style={{ bottom: '20%', right: '20%', animationDelay: '4s' }} />
         </div>
       )}
 

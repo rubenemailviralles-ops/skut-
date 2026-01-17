@@ -1,16 +1,65 @@
-@font-face {
-  font-family: 'BoldMoves';
-  src:
-    url('/fonts/BoldMoves.woff2') format('woff2'),
-    url('/fonts/BoldMoves.woff') format('woff'),
-    url('/fonts/BoldMoves.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+/* Global Theme Typography */
+body.theme-industrial {
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  letter-spacing: -0.02em;
+}
+body.theme-industrial h1, body.theme-industrial h2, body.theme-industrial h3, body.theme-industrial h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+body.theme-psytrance {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+body.theme-detroit {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes noise-anim {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(-15%, 0); }
+  90% { transform: translate(10%, 5%); }
+  100% { transform: translate(5%, 0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes liquid-morph {
+  0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+}
+
+@keyframes data-stream {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
 }
 
 @keyframes pulse {
@@ -92,6 +141,33 @@
   animation: strobe 2s ease-in-out infinite;
 }
 
+.industrial-noise {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.1"/%3E%3C/svg%3E');
+  animation: noise-anim 0.5s infinite;
+  pointer-events: none;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+.industrial-glitch-layer {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  mix-blend-mode: hard-light;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.industrial-bg:hover .industrial-glitch-layer {
+  animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  opacity: 0.2;
+}
+
 .psytrance-bg {
   background: linear-gradient(180deg, #0a0015 0%, #1a0033 50%, #0f001a 100%);
   position: relative;
@@ -120,6 +196,17 @@
   pointer-events: none;
 }
 
+.psytrance-liquid {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(45deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+  animation: liquid-morph 8s ease-in-out infinite, rotate 20s linear infinite;
+  filter: blur(40px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
 .detroit-bg {
   background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #0f0f2a 100%);
   position: relative;
@@ -134,6 +221,29 @@
     linear-gradient(90deg, rgba(100, 150, 255, 0.03) 1px, transparent 1px),
     linear-gradient(180deg, rgba(100, 150, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.detroit-data-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, transparent, rgba(0, 255, 255, 0.1) 50%, transparent);
+  background-size: 100% 20px;
+  animation: data-stream 2s linear infinite;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.detroit-scanline {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  animation: scanline 4s linear infinite;
   pointer-events: none;
 }
 
