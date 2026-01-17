@@ -12,6 +12,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
   const { theme, setTheme, gender, setGender } = useTheme();
+  const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
 
   const getThemeColors = () => {
     switch (theme) {
@@ -69,9 +70,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <div key={item} className="relative group">
                 <button
                   onClick={() => onNavigate(item)}
-                  className={`text-sm font-medium transition-colors ${
-                    currentPage === item ? colors.text : `text-gray-400 ${colors.hover}`
-                  }`}
+                  className={`text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
                 </button>
@@ -79,14 +78,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <div className={`absolute left-0 mt-0 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-4`}>
                   <div className="flex">
                     <div className="flex-1 px-4">
-                      <p className="text-xs text-gray-500 font-semibold mb-3 uppercase">Themes</p>
+                      <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Themes</p>
                       <div className="space-y-2">
                         {['industrial', 'psytrance', 'detroit'].map((t) => (
                           <button
                             key={t}
                             onClick={() => setTheme(t as any)}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
-                              theme === t ? colors.text + ' bg-white/10' : 'text-gray-400 hover:text-gray-300'
+                              theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
                           >
                             {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -98,14 +97,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     <div className="w-px bg-white/10"></div>
 
                     <div className="flex-1 px-4">
-                      <p className="text-xs text-gray-500 font-semibold mb-3 uppercase">Gender</p>
+                      <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Gender</p>
                       <div className="space-y-2">
                         {['male', 'female'].map((g) => (
                           <button
                             key={g}
                             onClick={() => setGender(g as any)}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
-                              gender === g ? colors.text + ' bg-white/10' : 'text-gray-400 hover:text-gray-300'
+                              gender === g ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
                           >
                             {g.charAt(0).toUpperCase() + g.slice(1)}
@@ -120,15 +119,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <button
                 key={item}
                 onClick={() => onNavigate(item)}
-                className={`text-sm font-medium transition-colors ${
-                  currentPage === item ? colors.text : `text-gray-400 ${colors.hover}`
-                }`}
+                className={`text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               >
                 {item.toUpperCase()}
               </button>
             )
           )}
-          <button className={`${colors.text} ${colors.hover} transition-colors`}>
+          <button className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110`}>
             <ShoppingCart className="w-5 h-5" />
           </button>
         </nav>
@@ -151,16 +148,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     onClick={() => {
                       setMobileThemesOpen(!mobileThemesOpen);
                     }}
-                    className={`text-left text-sm font-medium transition-colors ${
-                      currentPage === item ? colors.text : `text-gray-400 ${colors.hover}`
-                    }`}
+                    className={`text-left text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                   >
                     {item.toUpperCase()}
                   </button>
 
                   {mobileThemesOpen && (
                     <div className="mt-3 ml-4 space-y-3">
-                      <p className="text-xs text-gray-500 font-semibold uppercase">Themes</p>
+                      <p className={`text-xs uppercase ${ledClass} opacity-80`}>Themes</p>
                       <div className="space-y-2">
                         {['industrial', 'psytrance', 'detroit'].map((t) => (
                           <button
@@ -170,7 +165,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               setMobileThemesOpen(false);
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
-                              theme === t ? colors.text + ' bg-white/10' : 'text-gray-400'
+                              theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80`
                             }`}
                           >
                             {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -178,7 +173,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                         ))}
                       </div>
 
-                      <p className="text-xs text-gray-500 font-semibold uppercase mt-4">Gender</p>
+                      <p className={`text-xs uppercase mt-4 ${ledClass} opacity-80`}>Gender</p>
                       <div className={`inline-flex items-center rounded-full ${colors.bg} border ${colors.border} overflow-hidden`}>
                         {['male', 'female'].map((g, idx) => (
                           <div key={g} className="flex items-center">
@@ -186,8 +181,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               onClick={() => setGender(g as any)}
                               className={`px-4 py-2 text-sm font-medium transition-colors ${
                                 gender === g
-                                  ? colors.text + ' bg-white/10'
-                                  : 'text-gray-400'
+                                  ? `${ledClass} bg-white/10`
+                                  : `${ledClass} opacity-80`
                               }`}
                             >
                               {g.charAt(0).toUpperCase() + g.slice(1)}
@@ -206,15 +201,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     onNavigate(item);
                     setMenuOpen(false);
                   }}
-                  className={`text-left text-sm font-medium transition-colors ${
-                    currentPage === item ? colors.text : `text-gray-400 ${colors.hover}`
-                  }`}
+                  className={`text-left text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
                 </button>
               )
             )}
-            <button className={`text-left ${colors.text} ${colors.hover} transition-colors flex items-center`}>
+            <button className={`text-left ${ledClass} led-icon transition-transform duration-200 hover:scale-[1.02] flex items-center`}>
               <ShoppingCart className="w-5 h-5 mr-2" />
               CART
             </button>
