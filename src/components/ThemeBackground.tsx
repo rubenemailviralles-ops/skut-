@@ -6,6 +6,7 @@ export default function ThemeBackground() {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const [industrialUseFallback, setIndustrialUseFallback] = useState(false);
   const [psytranceUseFallback, setPsytranceUseFallback] = useState(false);
+  const [detroitUseFallback, setDetroitUseFallback] = useState(false);
   const baseUrl = import.meta.env.BASE_URL;
 
   useEffect(() => {
@@ -32,6 +33,16 @@ export default function ThemeBackground() {
     img.onload = () => setIndustrialUseFallback(false);
     img.onerror = () => setIndustrialUseFallback(true);
     img.src = `${baseUrl}industrial-warehouse.jpg`;
+  }, [baseUrl, theme]);
+
+  useEffect(() => {
+    if (theme !== 'detroit') return;
+
+    setDetroitUseFallback(false);
+    const img = new Image();
+    img.onload = () => setDetroitUseFallback(false);
+    img.onerror = () => setDetroitUseFallback(true);
+    img.src = `${baseUrl}detroit-underground.jpg`;
   }, [baseUrl, theme]);
 
   return (
@@ -74,7 +85,12 @@ export default function ThemeBackground() {
       )}
 
       {theme === 'detroit' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat detroit-bg" style={{ backgroundImage: `url(${baseUrl}15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp)` }}>
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat detroit-bg"
+          style={{
+            backgroundImage: `url(${baseUrl}${detroitUseFallback ? '15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp' : 'detroit-underground.jpg'})`,
+          }}
+        >
              <div className="detroit-circuits" />
              <div className="detroit-data-stream" />
              <div className="detroit-scanline" />
