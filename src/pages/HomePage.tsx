@@ -9,6 +9,8 @@ interface HomePageProps {
 export default function HomePage({ onNavigate }: HomePageProps) {
   const { theme } = useTheme();
 
+  const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
+
   const getThemeColors = () => {
     switch (theme) {
       case 'industrial':
@@ -55,7 +57,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         <div className="container mx-auto px-4 py-16">
           <button
             onClick={() => onNavigate('Shop')}
-            className={`${colors.accent} ${colors.border} border px-12 py-4 rounded-lg font-bold text-lg transition-all duration-300 ${colors.hover} hover:${colors.bg} hover:scale-105`}
+            className={`${ledClass} led-border border-2 border-current bg-black/40 px-12 py-4 rounded-lg text-lg transition-all duration-300 hover:scale-105`}
           >
             SHOP MORE
           </button>

@@ -412,6 +412,22 @@ body.theme-detroit {
   text-transform: uppercase;
 }
 
+.led-border {
+  border-color: currentColor;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px currentColor,
+    0 0 22px currentColor;
+  transition: box-shadow 250ms ease;
+}
+
+.led-border:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 0 1px currentColor,
+    0 0 34px currentColor;
+}
+
 /* Logo border/outline for visibility with cyan glow */
 .logo-container {
   position: relative;

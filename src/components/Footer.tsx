@@ -3,6 +3,7 @@ import { useTheme } from '../context/ThemeContext';
 
 export default function Footer() {
   const { theme } = useTheme();
+  const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
 
   const getThemeColors = () => {
     switch (theme) {
@@ -52,7 +53,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Newsletter</h4>
+            <h4 className={`mb-4 ${ledClass}`}>Newsletter</h4>
             <form className="flex flex-col sm:flex-row gap-2">
               <input
                 type="email"
@@ -70,7 +71,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Follow Us</h4>
+            <h4 className={`mb-4 ${ledClass}`}>Follow Us</h4>
             <div className="flex space-x-4">
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, idx) => (
                 <button
