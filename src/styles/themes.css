@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'BraveGates';
+  src: url('../assets/fonts/BraveGatesPersonalUse-jEA1v.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Global Theme Typography */
 body.theme-industrial {
   font-family: 'Arial Black', 'Impact', sans-serif;
