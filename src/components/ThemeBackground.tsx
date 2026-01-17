@@ -38,7 +38,7 @@ export default function ThemeBackground() {
       )}
 
       {theme === 'psytrance' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat psytrance-bg" style={{ backgroundImage: `url(${baseUrl}psytrance-new.jpg)` }}>
+        <div className="w-full h-full bg-cover bg-center bg-no-repeat psytrance-bg" style={{ backgroundImage: `url(${baseUrl}best-psytrance-festivals.jpg)` }}>
              <div className="psytrance-mandala" />
              <div className="psytrance-vortex" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
              <div className="psytrance-liquid" style={{ top: '20%', left: '20%' }} />
