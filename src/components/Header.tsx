@@ -51,13 +51,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         >
           <span
             className={`text-2xl md:text-3xl tracking-wider ${colors.text} theme-transition logo-outline`}
-            style={{ fontFamily: 'BoldMoves, "Russo One", sans-serif', letterSpacing: '0.05em', fontWeight: 400 }}
+            style={{ fontFamily: 'BraveGates, BoldMoves, "Russo One", sans-serif', letterSpacing: '0.1em', fontWeight: 400, lineHeight: 1 }}
           >
             SKUT
           </span>
           <span
             className={`text-[10px] md:text-xs tracking-wider ${colors.text} theme-transition logo-outline`}
-            style={{ fontFamily: '"Audiowide", cursive', letterSpacing: '0.08em', marginTop: '-2px', fontWeight: 400 }}
+            style={{ fontFamily: 'BraveGates, "Audiowide", cursive', letterSpacing: '0.22em', marginTop: '0.1rem', fontWeight: 400, lineHeight: 1.1 }}
           >
             APPAREL
           </span>

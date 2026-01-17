@@ -52,13 +52,13 @@ export default function HeroSection() {
         <div className="mb-4 md:mb-8 leading-none logo-container">
           <h1
             className={`text-5xl md:text-7xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
-            style={{ fontFamily: 'BraveGates, BoldMoves, "Russo One", sans-serif', letterSpacing: '0.05em', fontWeight: 400 }}
+            style={{ fontFamily: 'BraveGates, BoldMoves, "Russo One", sans-serif', letterSpacing: '0.1em', fontWeight: 400, lineHeight: 0.92 }}
           >
             SKUT
           </h1>
           <p
             className={`text-xl md:text-3xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
-            style={{ fontFamily: 'BraveGates, "Audiowide", cursive', letterSpacing: '0.08em', marginTop: '-4px', fontWeight: 400 }}
+            style={{ fontFamily: 'BraveGates, "Audiowide", cursive', letterSpacing: '0.22em', marginTop: '0.2rem', fontWeight: 400, lineHeight: 1.1 }}
           >
             APPAREL
           </p>
