@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function ThemeBackground() {
   const { theme } = useTheme();
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [industrialUseFallback, setIndustrialUseFallback] = useState(false);
   const [psytranceUseFallback, setPsytranceUseFallback] = useState(false);
   const baseUrl = import.meta.env.BASE_URL;
 
@@ -23,10 +24,25 @@ export default function ThemeBackground() {
     if (theme === 'psytrance') setPsytranceUseFallback(false);
   }, [theme]);
 
+  useEffect(() => {
+    if (theme !== 'industrial') return;
+
+    setIndustrialUseFallback(false);
+    const img = new Image();
+    img.onload = () => setIndustrialUseFallback(false);
+    img.onerror = () => setIndustrialUseFallback(true);
+    img.src = `${baseUrl}industrial-warehouse.jpg`;
+  }, [baseUrl, theme]);
+
   return (
     <div className="fixed inset-0 -z-10 theme-transition">
       {theme === 'industrial' && (
-        <div className="w-full h-full bg-cover bg-center bg-no-repeat industrial-bg" style={{ backgroundImage: `url(${baseUrl}image.jpg)` }}>
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat industrial-bg"
+          style={{
+            backgroundImage: `url(${baseUrl}${industrialUseFallback ? 'image.jpg' : 'industrial-warehouse.jpg'})`,
+          }}
+        >
           <div className="absolute inset-0 bg-black/40" />
           <div className="industrial-noise" />
           <div className="industrial-glitch-layer" />
