@@ -35,8 +35,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="mb-3 leading-none logo-container">
-              <h3 className={`text-2xl tracking-wider ${colors.text} logo-outline`} style={{ fontFamily: 'BoldMoves, "Russo One", sans-serif', letterSpacing: '0.05em', fontWeight: 400 }}>SKUT</h3>
-              <p className={`text-xs tracking-wider ${colors.text} logo-outline`} style={{ fontFamily: 'BoldMoves, "Russo One", sans-serif', letterSpacing: '0.05em', marginTop: '-2px', fontWeight: 400 }}>APPAREL</p>
+              <h3
+                className={`text-2xl tracking-wider ${colors.text} logo-outline`}
+                style={{ fontFamily: 'BraveGates, BoldMoves, "Russo One", sans-serif', letterSpacing: '0.1em', fontWeight: 400, lineHeight: 1 }}
+              >
+                SKUT
+              </h3>
+              <p
+                className={`text-xs tracking-wider ${colors.text} logo-outline`}
+                style={{ fontFamily: 'BraveGates, "Audiowide", cursive', letterSpacing: '0.22em', marginTop: '0.1rem', fontWeight: 400, lineHeight: 1.1 }}
+              >
+                APPAREL
+              </p>
             </div>
             <p className={`text-sm ${theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue'}`}>FOR RAVERS BY RAVERS</p>
           </div>
