@@ -67,15 +67,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         <nav className="hidden md:flex items-center space-x-8 relative">
           {navItems.map((item) =>
             item === 'Shop' ? (
-              <div key={item} className="relative group">
+              <div key={item} className="relative group flex items-center">
                 <button
                   onClick={() => onNavigate(item)}
-                  className={`text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+                  className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
                 </button>
 
-                <div className={`absolute left-0 mt-0 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-4`}>
+                <div className={`absolute left-0 top-full mt-3 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-4`}>
                   <div className="flex">
                     <div className="flex-1 px-4">
                       <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Themes</p>
@@ -119,7 +119,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <button
                 key={item}
                 onClick={() => onNavigate(item)}
-                className={`text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+                className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               >
                 {item.toUpperCase()}
               </button>
