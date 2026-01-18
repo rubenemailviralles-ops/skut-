@@ -47,7 +47,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const shopDropdownVisible = dropdownPinned || dropdownHover;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md border-b ${colors.border} theme-transition`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <button
           onClick={() => onNavigate('Home')}
@@ -167,9 +167,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         </button>
       </div>
 
+      <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
+
       {menuOpen && (
         <div className={`md:hidden ${colors.bg} backdrop-blur-md`}>
-          <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             {navItems.map((item) =>
               item === 'Shop' ? (

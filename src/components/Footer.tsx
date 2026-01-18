@@ -87,8 +87,9 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="neon-divider-line mt-8" style={{ ['--neon-color' as any]: neonColor }} />
+
         <div className="pt-8 text-center text-gray-500 text-sm">
-          <div className="neon-divider-line mb-8" style={{ ['--neon-color' as any]: neonColor }} />
           <p>&copy; 2026 SKUT. For Ravers by Ravers. All rights reserved.</p>
         </div>
       </div>
