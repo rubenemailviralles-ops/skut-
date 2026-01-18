@@ -14,6 +14,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
   const { theme, setTheme, gender, setGender } = useTheme();
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
+  const neonColor = theme === 'industrial' ? '#ef4444' : theme === 'psytrance' ? '#c084fc' : '#60a5fa';
 
   const getThemeColors = () => {
     switch (theme) {
@@ -116,7 +117,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                       </div>
                     </div>
 
-                    <div className="w-px bg-white/10"></div>
+                    <div className="self-stretch neon-divider-vertical" style={{ ['--neon-color' as any]: neonColor }} />
 
                     <div className="flex-1 px-4">
                       <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Gender</p>
@@ -167,7 +168,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       </div>
 
       {menuOpen && (
-        <div className={`md:hidden ${colors.bg} backdrop-blur-md border-t ${colors.border}`}>
+        <div className={`md:hidden ${colors.bg} backdrop-blur-md`}>
+          <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             {navItems.map((item) =>
               item === 'Shop' ? (
@@ -217,7 +219,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             >
                               {g.charAt(0).toUpperCase() + g.slice(1)}
                             </button>
-                            {idx === 0 && <div className="h-5 w-px bg-white/10"></div>}
+                            {idx === 0 && (
+                              <div className="h-5 neon-divider-vertical" style={{ ['--neon-color' as any]: neonColor }} />
+                            )}
                           </div>
                         ))}
                       </div>
@@ -242,7 +246,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               CART
             </button>
 
-            <div className={`border-t ${colors.border} pt-4 mt-2`}>
+            <div className="pt-4 mt-2">
+              <div className="neon-divider-line mb-4" style={{ ['--neon-color' as any]: neonColor }} />
               <div className="space-y-3">
                 <p className={`text-xs uppercase ${ledClass} opacity-80`}>Newsletter</p>
                 <form

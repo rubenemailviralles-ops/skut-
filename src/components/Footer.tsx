@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 export default function Footer() {
   const { theme } = useTheme();
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
+  const neonColor = theme === 'industrial' ? '#ef4444' : theme === 'psytrance' ? '#c084fc' : '#60a5fa';
 
   const getThemeColors = () => {
     switch (theme) {
@@ -31,7 +32,8 @@ export default function Footer() {
   const colors = getThemeColors();
 
   return (
-    <footer className={`bg-black/90 backdrop-blur-md border-t ${colors.border} theme-transition`}>
+    <footer className={`bg-black/90 backdrop-blur-md theme-transition`}>
+      <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
@@ -85,7 +87,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={`border-t ${colors.border} pt-8 text-center text-gray-500 text-sm`}>
+        <div className="pt-8 text-center text-gray-500 text-sm">
+          <div className="neon-divider-line mb-8" style={{ ['--neon-color' as any]: neonColor }} />
           <p>&copy; 2026 SKUT. For Ravers by Ravers. All rights reserved.</p>
         </div>
       </div>

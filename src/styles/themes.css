@@ -545,6 +545,31 @@ body.theme-detroit {
   }
 }
 
+.neon-divider-line {
+  --neon-color: #ffffff;
+  height: 1px;
+  width: 100%;
+  background-color: var(--neon-color);
+  opacity: 0.28;
+  box-shadow: 0 0 12px var(--neon-color);
+}
+
+.neon-divider-vertical {
+  --neon-color: #ffffff;
+  width: 1px;
+  height: 100%;
+  background-color: var(--neon-color);
+  opacity: 0.22;
+  box-shadow: 0 0 12px var(--neon-color);
+}
+
+@media (max-width: 768px) {
+  .neon-divider-line,
+  .neon-divider-vertical {
+    box-shadow: 0 0 8px var(--neon-color);
+  }
+}
+
 .theme-box-active {
   border-color: color-mix(in srgb, var(--led-color) 55%, rgba(255, 255, 255, 0.18));
   box-shadow:
