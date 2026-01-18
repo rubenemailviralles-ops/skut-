@@ -57,7 +57,7 @@ export default function HeroSection() {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 pt-16 md:pt-24 pb-8">
-      <div className="text-center mb-6 md:mb-16 animate-fadeIn">
+      <div className="text-center mb-6 md:mb-16 flow-item">
         <div className="mb-4 md:mb-8 leading-none logo-container">
           <h1
             className={`text-5xl md:text-7xl tracking-wider ${theme === 'industrial' ? 'text-red-400' : theme === 'psytrance' ? 'text-purple-300' : 'text-blue-300'} theme-transition logo-outline`}
@@ -78,7 +78,7 @@ export default function HeroSection() {
       </div>
 
       <div className="mb-3 md:mb-8 w-full max-w-4xl">
-        <h2 className={`text-lg md:text-3xl mb-2 md:mb-6 text-center ${ledClass}`}>
+        <h2 className={`text-lg md:text-3xl mb-2 md:mb-6 text-center ${ledClass} flow-item`}>
           Select Your Vibe
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
@@ -102,7 +102,7 @@ export default function HeroSection() {
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-3 md:mb-8">
-        <span className={`text-xs md:text-sm ${ledClass}`}>FILTER:</span>
+        <span className={`text-xs md:text-sm ${ledClass} flow-item`}>FILTER:</span>
         <div className="flex gap-2 md:gap-3">
           <button
             onClick={() => setGender('male')}

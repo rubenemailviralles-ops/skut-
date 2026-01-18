@@ -34,7 +34,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-12 animate-fadeIn">
+        <div className="text-center mb-12 flow-item">
           <h1 className={`text-5xl md:text-6xl font-black text-white mb-5 ${colors.accent}`}>Terms & Conditions</h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             Long-form legal information. Please read carefully.

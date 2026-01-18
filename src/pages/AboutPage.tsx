@@ -32,7 +32,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16 animate-fadeIn">
+        <div className="text-center mb-16 flow-item">
           <div className="mb-6 leading-none logo-container">
             <h1 className={`text-5xl md:text-7xl tracking-wider ${colors.accent} logo-outline`} style={{ fontFamily: 'BoldMoves, "Russo One", sans-serif', letterSpacing: '0.05em', fontWeight: 400 }}>
               SKUT

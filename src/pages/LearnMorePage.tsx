@@ -77,7 +77,7 @@ export default function LearnMorePage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16 animate-fadeIn">
+        <div className="text-center mb-16 flow-item">
           <h1 className={`text-5xl md:text-7xl font-black text-white mb-6 ${colors.accent}`}>
             The Culture
           </h1>

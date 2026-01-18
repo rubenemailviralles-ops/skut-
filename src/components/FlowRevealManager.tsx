@@ -17,13 +17,13 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
       (entries) => {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
-          if (entry.intersectionRatio >= 0.2) el.classList.add('flow-in');
+          if (entry.intersectionRatio >= 0.22) el.classList.add('flow-in');
           else el.classList.remove('flow-in');
         }
       },
       {
         root: rootEl,
-        threshold: [0, 0.2, 1],
+        threshold: [0, 0.22, 1],
       }
     );
 
@@ -51,4 +51,3 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
 
   return null;
 }
-
