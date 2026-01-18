@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Menu, Search, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
+import { Facebook, Home, Instagram, Menu, Search, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import GenderPictogram from './GenderPictogram';
@@ -46,6 +46,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const colors = getThemeColors();
   const navItems = ['Home', 'Shop', 'About Us', 'Learn More'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
+  const showHomeInMobileMenu = currentPage !== 'Home';
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition`}>
@@ -213,6 +214,23 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       {menuOpen && (
         <div className={`md:hidden ${colors.bg} backdrop-blur-md`}>
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <div
+              className={`transition-all duration-300 overflow-hidden ${
+                showHomeInMobileMenu ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+              }`}
+            >
+              <button
+                onClick={() => {
+                  onNavigate('Home');
+                  setMenuOpen(false);
+                  setMobileThemesOpen(false);
+                }}
+                className={`text-left text-sm transition-opacity ${ledClass} flex items-center`}
+              >
+                <Home className="w-4 h-4 mr-2" />
+                HOME
+              </button>
+            </div>
             {navItems.map((item) =>
               item === 'Shop' ? (
                 <div key={item}>
