@@ -43,7 +43,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   const colors = getThemeColors();
-  const navItems = ['Home', 'Shop', 'Search', 'About Us', 'Learn More'];
+  const navItems = ['Home', 'Shop', 'About Us', 'Learn More'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
 
   return (
@@ -138,17 +138,26 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   </div>
                 </div>
               </div>
-            ) : item === 'Search' ? (
-              <button
-                key={item}
-                onClick={() => onNavigate('Search')}
-                className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
-                  currentPage === 'Search' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-                }`}
-                aria-label="Search"
-              >
-                <Search className="w-5 h-5" />
-              </button>
+            ) : item === 'About Us' ? (
+              <>
+                <button
+                  key="Search"
+                  onClick={() => onNavigate('Search')}
+                  className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
+                    currentPage === 'Search' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                  }`}
+                  aria-label="Search"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+                <button
+                  key={item}
+                  onClick={() => onNavigate(item)}
+                  className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+                >
+                  {item.toUpperCase()}
+                </button>
+              </>
             ) : (
               <button
                 key={item}
@@ -255,20 +264,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     </div>
                   )}
                 </div>
-              ) : item === 'Search' ? (
-                <button
-                  key={item}
-                  onClick={() => {
-                    onNavigate('Search');
-                    setMenuOpen(false);
-                  }}
-                  className={`text-left text-sm transition-opacity ${ledClass} ${
-                    currentPage === 'Search' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-                  } flex items-center`}
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  SEARCH
-                </button>
               ) : (
                 <button
                   key={item}
