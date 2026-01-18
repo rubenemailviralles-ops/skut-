@@ -1,4 +1,4 @@
-import { Menu, ShoppingCart, X } from 'lucide-react';
+import { Facebook, Instagram, Menu, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -235,6 +235,44 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <ShoppingCart className="w-5 h-5 mr-2" />
               CART
             </button>
+
+            <div className={`border-t ${colors.border} pt-4 mt-2`}>
+              <div className="space-y-3">
+                <p className={`text-xs uppercase ${ledClass} opacity-80`}>Newsletter</p>
+                <form
+                  className="flex flex-col gap-2"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-2 text-white text-sm focus:outline-none focus:border-current theme-transition"
+                    style={{ borderColor: theme === 'industrial' ? '#ef4444' : theme === 'psytrance' ? '#c084fc' : '#60a5fa' }}
+                  />
+                  <button
+                    type="submit"
+                    className={`${ledClass} led-border border-2 border-current bg-black/40 rounded px-6 py-2 text-sm transition-all duration-300 md:hover:scale-105 active:scale-[0.99]`}
+                  >
+                    Subscribe
+                  </button>
+                </form>
+
+                <p className={`text-xs uppercase pt-2 ${ledClass} opacity-80`}>Follow Us</p>
+                <div className="flex space-x-4">
+                  {[Facebook, Instagram, Twitter, Youtube].map((Icon, idx) => (
+                    <button
+                      key={idx}
+                      className={`${ledClass} led-icon transition-transform duration-200 md:hover:scale-110 active:scale-[0.99]`}
+                      type="button"
+                    >
+                      <Icon className="w-5 h-5" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
         </div>
       )}
