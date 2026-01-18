@@ -164,18 +164,33 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
         </nav>
 
-        <button
-          className={`md:hidden ${colors.text}`}
-          onClick={() =>
-            setMenuOpen((open) => {
-              const next = !open;
-              setMobileThemesOpen(next);
-              return next;
-            })
-          }
-        >
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={() => {
+              onNavigate('Search');
+              setMenuOpen(false);
+              setMobileThemesOpen(false);
+            }}
+            className={`${ledClass} led-icon transition-transform duration-200 active:scale-[0.99]`}
+            aria-label="Search"
+          >
+            <Search className="w-6 h-6" />
+          </button>
+
+          <button
+            className={colors.text}
+            onClick={() =>
+              setMenuOpen((open) => {
+                const next = !open;
+                setMobileThemesOpen(next);
+                return next;
+              })
+            }
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
