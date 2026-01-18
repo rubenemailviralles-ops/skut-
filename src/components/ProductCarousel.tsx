@@ -72,20 +72,6 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
           <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass}`}>
             {category}
           </h2>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => scroll('left')}
-              className={`p-2 rounded-full bg-black/50 border ${colors.accent} ${colors.hover} transition-all hover:scale-110`}
-            >
-              <ChevronLeft className="w-5 h-5 text-white" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className={`p-2 rounded-full bg-black/50 border ${colors.accent} ${colors.hover} transition-all hover:scale-110`}
-            >
-              <ChevronRight className="w-5 h-5 text-white" />
-            </button>
-          </div>
         </div>
 
         <div
@@ -105,6 +91,21 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
               <p className="text-gray-600 text-xs mt-2">Placeholder #{idx + 1}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-5 flex justify-center gap-3">
+          <button
+            onClick={() => scroll('left')}
+            className={`p-3 md:p-2 rounded-full bg-black/50 border ${colors.accent} ${colors.hover} transition-all md:hover:scale-110 active:scale-[0.98]`}
+          >
+            <ChevronLeft className="w-5 h-5 text-white" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className={`p-3 md:p-2 rounded-full bg-black/50 border ${colors.accent} ${colors.hover} transition-all md:hover:scale-110 active:scale-[0.98]`}
+          >
+            <ChevronRight className="w-5 h-5 text-white" />
+          </button>
         </div>
       </div>
     </section>
