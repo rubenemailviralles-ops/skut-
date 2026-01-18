@@ -187,7 +187,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               setMenuOpen(false);
               setMobileThemesOpen(false);
             }}
-            className={`${ledClass} led-icon transition-transform duration-200 active:scale-[0.99]`}
+            className={`${ledClass} led-icon transition-all duration-300 active:scale-[0.99] ${
+              currentPage === 'Search' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-100'
+            }`}
             aria-label="Search"
           >
             <Search className="w-6 h-6" />
