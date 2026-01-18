@@ -452,3 +452,37 @@ body.theme-detroit {
     0 0 22px rgba(0, 255, 255, 0.15);
   transition: text-shadow 250ms ease, filter 250ms ease;
 }
+
+@media (max-width: 768px) {
+  .theme-transition {
+    transition: none !important;
+  }
+
+  .led-light-red,
+  .led-light-purple,
+  .led-light-blue {
+    animation: none !important;
+    text-shadow:
+      0 0 6px currentColor,
+      0 0 14px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  .logo-outline {
+    text-shadow:
+      -1px 0 1px rgba(0, 0, 0, 0.55),
+      1px 0 1px rgba(0, 0, 0, 0.55),
+      0 -1px 1px rgba(0, 0, 0, 0.55),
+      0 1px 1px rgba(0, 0, 0, 0.55),
+      0 0 8px rgba(0, 255, 255, 0.18) !important;
+  }
+
+  .led-border {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 0 10px currentColor !important;
+  }
+
+  .led-icon {
+    filter: drop-shadow(0 0 6px currentColor) !important;
+  }
+}

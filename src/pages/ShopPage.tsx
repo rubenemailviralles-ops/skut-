@@ -1,8 +1,23 @@
 import ProductCarousel from '../components/ProductCarousel';
 import { useTheme } from '../context/ThemeContext';
+import { useEffect, useState } from 'react';
 
 export default function ShopPage() {
   const { gender, theme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    if ('addEventListener' in mq) {
+      mq.addEventListener('change', update);
+      return () => mq.removeEventListener('change', update);
+    }
+    mq.addListener(update);
+    return () => mq.removeListener(update);
+  }, []);
 
   const getThemeColors = () => {
     switch (theme) {
@@ -44,6 +59,8 @@ export default function ShopPage() {
     'Socks',
   ];
 
+  const visibleCategories = isMobile && !showAllCategories ? categories.slice(0, 3) : categories;
+
   return (
     <div className="min-h-screen pt-24 pb-16">
       <div className="container mx-auto px-4 mb-12">
@@ -59,10 +76,21 @@ export default function ShopPage() {
         {topCategories.map((category) => (
           <ProductCarousel key={category} category={category} itemCount={8} />
         ))}
-        {categories.map((category) => (
+        {visibleCategories.map((category) => (
           <ProductCarousel key={category} category={category} itemCount={8} />
         ))}
       </div>
+
+      {isMobile && !showAllCategories && (
+        <div className="container mx-auto px-4 mt-6">
+          <button
+            onClick={() => setShowAllCategories(true)}
+            className={`${theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue'} led-border border-2 border-current bg-black/40 w-full rounded-lg py-3 text-sm transition-transform duration-200 active:scale-[0.99]`}
+          >
+            Load More
+          </button>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 mt-16">
         <div className={`bg-black/50 backdrop-blur-sm border ${colors.border} ${colors.card} rounded-lg p-12 text-center`}>

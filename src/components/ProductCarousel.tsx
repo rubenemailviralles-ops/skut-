@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ProductCarouselProps {
   category: string;
@@ -11,6 +11,19 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
   const { theme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    if ('addEventListener' in mq) {
+      mq.addEventListener('change', update);
+      return () => mq.removeEventListener('change', update);
+    }
+    mq.addListener(update);
+    return () => mq.removeListener(update);
+  }, []);
 
   const getThemeColors = () => {
     switch (theme) {
@@ -50,8 +63,10 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
     }
   };
 
+  const effectiveItemCount = isMobile ? Math.min(itemCount, 4) : itemCount;
+
   return (
-    <section className="py-12 px-4">
+    <section className="py-12 px-4 cv-auto">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass}`}>
@@ -78,7 +93,7 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
           className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {Array.from({ length: itemCount }).map((_, idx) => (
+          {Array.from({ length: effectiveItemCount }).map((_, idx) => (
             <div
               key={idx}
               className={`flex-shrink-0 w-72 h-96 rounded-lg border-2 border-dashed ${colors.accent} ${colors.bg} backdrop-blur-sm flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 ${colors.hover} cursor-pointer group snap-start`}
