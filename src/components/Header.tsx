@@ -44,7 +44,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   const colors = getThemeColors();
-  const navItems = ['Home', 'Shop', 'About Us', 'Learn More'];
+  const navItems = ['Home', 'Shop', 'About Us', 'Learn More', 'Terms'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
   const showHomeInMobileMenu = currentPage !== 'Home';
 

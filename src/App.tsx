@@ -8,6 +8,7 @@ import ShopPage from './pages/ShopPage';
 import SearchPage from './pages/SearchPage';
 import AboutPage from './pages/AboutPage';
 import LearnMorePage from './pages/LearnMorePage';
+import TermsPage from './pages/TermsPage';
 import { preloadImages, preloadFont, runWhenIdle } from './lib/preload';
 import { getThemeAssetUrls } from './lib/themeAssets';
 
@@ -55,6 +56,8 @@ function App() {
         return <AboutPage />;
       case 'Learn More':
         return <LearnMorePage />;
+      case 'Terms':
+        return <TermsPage />;
       default:
         return <HomePage onNavigate={setCurrentPage} />;
     }
