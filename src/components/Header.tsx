@@ -231,7 +231,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 HOME
               </button>
             </div>
-            {navItems.map((item) =>
+            {navItems.filter((item) => item !== 'Home').map((item) =>
               item === 'Shop' ? (
                 <div key={item}>
                   <button
