@@ -25,7 +25,7 @@ export default function ShopPage() {
         return {
           accent: 'text-red-500',
           border: 'border-red-500/30',
-          card: 'hover:border-red-500 hover:[animation:glitch-anim_0.3s_ease-in-out_infinite]'
+          card: 'hover:border-red-500 hover:shadow-[0_0_18px_rgba(239,68,68,0.18)] transition-all duration-300'
         };
       case 'psytrance':
         return {
@@ -37,7 +37,7 @@ export default function ShopPage() {
         return {
           accent: 'text-blue-400',
           border: 'border-blue-500/30',
-          card: 'hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300'
+          card: 'hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:[animation:glitch-anim_0.28s_ease-in-out_infinite] transition-all duration-300'
         };
     }
   };
