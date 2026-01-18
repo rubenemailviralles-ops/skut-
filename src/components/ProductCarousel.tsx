@@ -45,7 +45,7 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
         return {
           accent: 'border-blue-500',
           text: 'text-blue-400',
-          hover: 'hover:border-cyan-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:[animation:glitch-anim_0.28s_ease-in-out_infinite] duration-300',
+          hover: 'hover:border-cyan-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] duration-300',
           bg: 'bg-blue-950/20'
         };
     }
