@@ -148,7 +148,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 </div>
               </div>
             ) : item === 'About Us' ? (
-              <>
+              <span key={item} className="contents">
                 <div className="flex items-center gap-3">
                   <div
                     className="transition-all duration-300"
@@ -159,7 +159,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     }}
                   >
                     <button
-                      key="Search"
                       onClick={() => onNavigate('Search')}
                       className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
                         isSearchPage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
@@ -179,7 +178,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     }}
                   >
                     <button
-                      key="HomeIcon"
                       onClick={() => onNavigate('Home')}
                       className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
                         isHomePage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
@@ -191,13 +189,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   </div>
                 </div>
                 <button
-                  key={item}
                   onClick={() => onNavigate(item)}
                   className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
                 </button>
-              </>
+              </span>
             ) : (
               <button
                 key={item}
@@ -267,15 +264,54 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             }
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <span className={`burger-icon ${menuOpen ? 'burger-open' : ''}`}>
-              <span className="burger-line burger-line-top">
-                <span />
+            <span className="relative block w-6 h-6">
+              <span
+                className="absolute left-[3px] right-[3px] top-[6px] h-[2px]"
+                style={{
+                  transform: menuOpen ? 'translateY(5px)' : 'translateY(0)',
+                  transition: 'transform 160ms ease',
+                  transitionDelay: menuOpen ? '0ms' : '150ms',
+                }}
+              >
+                <span
+                  className="absolute inset-0 rounded-full bg-current"
+                  style={{
+                    transform: menuOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                    transition: 'transform 160ms ease',
+                    transitionDelay: menuOpen ? '150ms' : '0ms',
+                  }}
+                />
               </span>
-              <span className="burger-line burger-line-mid">
-                <span />
+
+              <span
+                className="absolute left-[3px] right-[3px] top-[11px] h-[2px]"
+                style={{
+                  transition: 'transform 160ms ease, opacity 160ms ease',
+                  transitionDelay: menuOpen ? '80ms' : '150ms',
+                  transform: menuOpen ? 'scaleX(0)' : 'scaleX(1)',
+                  opacity: menuOpen ? 0 : 1,
+                  transformOrigin: 'center',
+                }}
+              >
+                <span className="absolute inset-0 rounded-full bg-current" />
               </span>
-              <span className="burger-line burger-line-bot">
-                <span />
+
+              <span
+                className="absolute left-[3px] right-[3px] top-[16px] h-[2px]"
+                style={{
+                  transform: menuOpen ? 'translateY(-5px)' : 'translateY(0)',
+                  transition: 'transform 160ms ease',
+                  transitionDelay: menuOpen ? '0ms' : '150ms',
+                }}
+              >
+                <span
+                  className="absolute inset-0 rounded-full bg-current"
+                  style={{
+                    transform: menuOpen ? 'rotate(-45deg)' : 'rotate(0deg)',
+                    transition: 'transform 160ms ease',
+                    transitionDelay: menuOpen ? '150ms' : '0ms',
+                  }}
+                />
               </span>
             </span>
           </button>
@@ -284,9 +320,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
 
-      {menuOpen && (
-        <div className={`md:hidden ${colors.bg} backdrop-blur-md max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain`}>
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+      <div
+        className={`md:hidden ${colors.bg} backdrop-blur-md overflow-hidden transition-[max-height,opacity,transform] duration-200 ease-out`}
+        style={{
+          maxHeight: menuOpen ? 'calc(100dvh - 5.25rem)' : '0px',
+          opacity: menuOpen ? 1 : 0,
+          transform: menuOpen ? 'translateY(0)' : 'translateY(-8px)',
+          pointerEvents: menuOpen ? 'auto' : 'none',
+        }}
+      >
+        <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 showHomeInMobileMenu ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
@@ -434,8 +477,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </div>
             </div>
           </nav>
-        </div>
-      )}
+      </div>
     </header>
   );
 }
