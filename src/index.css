@@ -12,8 +12,13 @@ body,
 }
 
 body {
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
+  overflow: hidden;
+}
+
+.app-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
 

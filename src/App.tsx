@@ -54,9 +54,9 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen text-white overflow-x-hidden bg-black">
+      <div className="relative h-[100dvh] w-full overflow-hidden text-white bg-black">
         <ThemeBackground />
-        <div className="relative z-10">
+        <div className="relative z-10 app-scroll">
           <Header currentPage={currentPage} onNavigate={setCurrentPage} />
           <main>
             {renderPage()}
