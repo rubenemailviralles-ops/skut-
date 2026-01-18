@@ -49,14 +49,10 @@ export default function HeroSection() {
     }
   };
 
-  const getGenderButtonStyle = (isActive: boolean) => {
-    const accentColor = theme === 'industrial' ? 'red' : theme === 'psytrance' ? 'purple' : 'blue';
-    return `px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-medium transition-all duration-300 ${
-      isActive
-        ? `bg-${accentColor}-600/40 border-2 border-${accentColor}-500 text-${accentColor}-300`
-        : 'bg-gray-900/50 border-2 border-gray-700 text-gray-400 hover:border-gray-500'
-    }`;
-  };
+  const genderLedColor = {
+    male: '#ef4444',
+    female: '#c084fc',
+  } as const;
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 pt-16 md:pt-24 pb-8">
@@ -109,13 +105,15 @@ export default function HeroSection() {
         <div className="flex gap-2 md:gap-3">
           <button
             onClick={() => setGender('male')}
-            className={getGenderButtonStyle(gender === 'male')}
+            className={`gender-box ${gender === 'male' ? 'gender-box-active' : ''}`}
+            style={{ ['--led-color' as any]: genderLedColor.male }}
           >
             Male
           </button>
           <button
             onClick={() => setGender('female')}
-            className={getGenderButtonStyle(gender === 'female')}
+            className={`gender-box ${gender === 'female' ? 'gender-box-active' : ''}`}
+            style={{ ['--led-color' as any]: genderLedColor.female }}
           >
             Female
           </button>
