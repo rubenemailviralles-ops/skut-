@@ -1,4 +1,4 @@
-import { Facebook, Home, Instagram, Menu, Search, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
+import { Facebook, Home, Instagram, Search, ShoppingCart, Twitter, Youtube } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import GenderPictogram from './GenderPictogram';
@@ -267,7 +267,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             }
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className={`burger-icon ${menuOpen ? 'burger-open' : ''}`}>
+              <span className="burger-line burger-line-top">
+                <span />
+              </span>
+              <span className="burger-line burger-line-mid">
+                <span />
+              </span>
+              <span className="burger-line burger-line-bot">
+                <span />
+              </span>
+            </span>
           </button>
         </div>
       </div>

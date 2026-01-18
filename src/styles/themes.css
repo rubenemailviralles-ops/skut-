@@ -434,6 +434,83 @@ body.theme-detroit {
     drop-shadow(0 0 14px rgba(255, 255, 255, 0.15));
 }
 
+.burger-icon {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.burger-line {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  height: 2px;
+  border-radius: 999px;
+  background: transparent;
+  transform: translateY(0);
+  transition: transform 160ms ease;
+  transition-delay: 150ms;
+}
+
+.burger-line > span {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background-color: currentColor;
+  transform: rotate(0deg) scaleX(1);
+  transition: transform 160ms ease, opacity 160ms ease;
+  transition-delay: 0ms;
+  opacity: 1;
+}
+
+.burger-line-top {
+  top: 6px;
+}
+
+.burger-line-mid {
+  top: 11px;
+}
+
+.burger-line-bot {
+  top: 16px;
+}
+
+.burger-open .burger-line {
+  transition-delay: 0ms;
+}
+
+.burger-open .burger-line-top {
+  transform: translateY(5px);
+}
+
+.burger-open .burger-line-bot {
+  transform: translateY(-5px);
+}
+
+.burger-open .burger-line-top > span,
+.burger-open .burger-line-bot > span {
+  transition-delay: 150ms;
+}
+
+.burger-open .burger-line-top > span {
+  transform: rotate(45deg) scaleX(1);
+}
+
+.burger-open .burger-line-bot > span {
+  transform: rotate(-45deg) scaleX(1);
+}
+
+.burger-open .burger-line-mid > span {
+  transform: rotate(0deg) scaleX(0);
+  opacity: 0;
+  transition-delay: 80ms;
+}
+
+.burger-line-mid > span {
+  transition-delay: 150ms;
+}
+
 /* Logo border/outline for visibility with cyan glow */
 .logo-container {
   position: relative;
