@@ -21,6 +21,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const cartHideTimerRef = useRef<number | null>(null);
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
   const neonColor = theme === 'industrial' ? '#ef4444' : theme === 'psytrance' ? '#c084fc' : '#60a5fa';
+  const genderLedColor = {
+    male: '#ef4444',
+    female: '#c084fc',
+  } as const;
 
   const getThemeColors = () => {
     switch (theme) {
@@ -213,7 +217,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               <GenderPictogram
                                 variant={g as any}
                                 className="w-5 h-5 neon-pictogram"
-                                style={{ color: neonColor }}
+                                style={{ color: genderLedColor[g as 'male' | 'female'] }}
                               />
                             </button>
                           ))}
@@ -434,7 +438,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               <GenderPictogram
                                 variant={g as any}
                                 className="w-4 h-4 neon-pictogram"
-                                style={{ color: neonColor }}
+                                style={{ color: genderLedColor[g as 'male' | 'female'] }}
                               />
                             </button>
                             {idx === 0 && (
