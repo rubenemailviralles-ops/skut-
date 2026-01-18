@@ -10,6 +10,7 @@ interface HeaderProps {
 
 export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuRendered, setMenuRendered] = useState(false);
   const [dropdownPinned, setDropdownPinned] = useState(false);
   const [dropdownHover, setDropdownHover] = useState(false);
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
@@ -51,7 +52,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const isSearchPage = currentPage === 'Search';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition relative`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <button
           onClick={() => onNavigate('Home')}
@@ -260,6 +261,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             onClick={() =>
               setMenuOpen((open) => {
                 const next = !open;
+                if (next) setMenuRendered(true);
                 setMobileThemesOpen(next);
                 return next;
               })
@@ -322,22 +324,25 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
 
-      <div
-        className={`md:hidden ${colors.bg} backdrop-blur-md overflow-hidden`}
-        style={{
-          maxHeight: menuOpen ? 'calc(100dvh - 5.25rem)' : '0px',
-          opacity: menuOpen ? 1 : 0,
-          transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)',
-          clipPath: menuOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
-          WebkitClipPath: menuOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
-          pointerEvents: menuOpen ? 'auto' : 'none',
-          transitionProperty: 'max-height, opacity, transform, clip-path',
-          transitionTimingFunction: menuOpen ? 'cubic-bezier(0.2, 0.9, 0.2, 1)' : 'cubic-bezier(0.4, 0, 0.2, 1)',
-          transitionDuration: menuOpen ? '240ms' : '180ms',
-          willChange: 'max-height, opacity, transform, clip-path',
-        }}
-      >
-        <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
+      {menuRendered && (
+        <div
+          className={`md:hidden absolute left-0 right-0 top-full ${colors.bg} backdrop-blur-md`}
+          onTransitionEnd={() => {
+            if (!menuOpen) setMenuRendered(false);
+          }}
+          style={{
+            maxHeight: 'calc(100dvh - 5.25rem)',
+            opacity: menuOpen ? 1 : 0,
+            transform: menuOpen ? 'translateY(0) scaleY(1)' : 'translateY(-12px) scaleY(0.98)',
+            transformOrigin: 'top',
+            pointerEvents: menuOpen ? 'auto' : 'none',
+            transitionProperty: 'transform, opacity',
+            transitionTimingFunction: menuOpen ? 'cubic-bezier(0.2, 0.9, 0.2, 1)' : 'cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDuration: menuOpen ? '220ms' : '160ms',
+            willChange: 'transform, opacity',
+          }}
+        >
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 showHomeInMobileMenu ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
@@ -485,7 +490,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </div>
             </div>
           </nav>
-      </div>
+        </div>
+      )}
     </header>
   );
 }
