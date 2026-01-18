@@ -321,12 +321,18 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
 
       <div
-        className={`md:hidden ${colors.bg} backdrop-blur-md overflow-hidden transition-[max-height,opacity,transform] duration-200 ease-out`}
+        className={`md:hidden ${colors.bg} backdrop-blur-md overflow-hidden`}
         style={{
           maxHeight: menuOpen ? 'calc(100dvh - 5.25rem)' : '0px',
           opacity: menuOpen ? 1 : 0,
-          transform: menuOpen ? 'translateY(0)' : 'translateY(-8px)',
+          transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)',
+          clipPath: menuOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
+          WebkitClipPath: menuOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
           pointerEvents: menuOpen ? 'auto' : 'none',
+          transitionProperty: 'max-height, opacity, transform, clip-path',
+          transitionTimingFunction: menuOpen ? 'cubic-bezier(0.2, 0.9, 0.2, 1)' : 'cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDuration: menuOpen ? '240ms' : '180ms',
+          willChange: 'max-height, opacity, transform, clip-path',
         }}
       >
         <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
