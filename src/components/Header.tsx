@@ -1,6 +1,7 @@
 import { Facebook, Home, Instagram, Search, ShoppingCart, Twitter, Youtube } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useCart } from '../context/CartContext';
 import GenderPictogram from './GenderPictogram';
 
 interface HeaderProps {
@@ -15,6 +16,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [dropdownHover, setDropdownHover] = useState(false);
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
   const { theme, setTheme, gender, setGender } = useTheme();
+  const { itemCount: cartItemCount } = useCart();
+  const [cartRendered, setCartRendered] = useState(false);
+  const cartHideTimerRef = useRef<number | null>(null);
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
   const neonColor = theme === 'industrial' ? '#ef4444' : theme === 'psytrance' ? '#c084fc' : '#60a5fa';
 
@@ -50,6 +54,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const showHomeInMobileMenu = currentPage !== 'Home';
   const isHomePage = currentPage === 'Home';
   const isSearchPage = currentPage === 'Search';
+
+  useEffect(() => {
+    if (cartHideTimerRef.current) window.clearTimeout(cartHideTimerRef.current);
+    if (cartItemCount > 0) {
+      setCartRendered(true);
+      return;
+    }
+    cartHideTimerRef.current = window.setTimeout(() => setCartRendered(false), 180);
+  }, [cartItemCount]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition relative`}>
@@ -112,12 +125,23 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </button>
             </div>
 
-            <button
-              className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100`}
-              aria-label="Cart"
-            >
-              <ShoppingCart className="w-5 h-5" />
-            </button>
+            {cartRendered && (
+              <div
+                className="transition-all duration-200"
+                style={{
+                  opacity: cartItemCount > 0 ? 1 : 0,
+                  transform: cartItemCount > 0 ? 'translateY(0) scale(1)' : 'translateY(-2px) scale(0.96)',
+                  pointerEvents: cartItemCount > 0 ? 'auto' : 'none',
+                }}
+              >
+                <button
+                  className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100`}
+                  aria-label="Cart"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center space-x-8 ml-10 relative">
@@ -137,7 +161,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                         return next;
                       })
                     }
-                    className={`text-sm leading-none transition-opacity ${ledClass} ${
+                    className={`text-sm leading-none transition-opacity ${ledClass} h-6 flex items-center ${
                       currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'
                     }`}
                   >
@@ -202,7 +226,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <button
                   key={item}
                   onClick={() => onNavigate(item)}
-                  className={`text-sm leading-none transition-opacity ${ledClass} ${
+                  className={`text-sm leading-none transition-opacity ${ledClass} h-6 flex items-center ${
                     currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'
                   }`}
                 >

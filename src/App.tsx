@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import { CartProvider } from './context/CartContext';
 import ThemeBackground from './components/ThemeBackground';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -65,16 +66,18 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="relative h-[100dvh] w-full overflow-hidden text-white bg-black">
-        <ThemeBackground />
-        <div ref={scrollContainerRef} className="relative z-10 app-scroll">
-          <Header currentPage={currentPage} onNavigate={setCurrentPage} />
-          <main>
-            {renderPage()}
-          </main>
-          <Footer />
+      <CartProvider>
+        <div className="relative h-[100dvh] w-full overflow-hidden text-white bg-black">
+          <ThemeBackground />
+          <div ref={scrollContainerRef} className="relative z-10 app-scroll">
+            <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+            <main>
+              {renderPage()}
+            </main>
+            <Footer />
+          </div>
         </div>
-      </div>
+      </CartProvider>
     </ThemeProvider>
   );
 }
