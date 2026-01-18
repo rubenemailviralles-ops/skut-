@@ -491,6 +491,8 @@ body.theme-detroit {
   --led-color: #ffffff;
   position: relative;
   overflow: hidden;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .theme-box::before {
@@ -532,6 +534,10 @@ body.theme-detroit {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .theme-box:not(.theme-box-active):hover {
+    transform: scale(1.05);
+  }
+
   .theme-box:not(.theme-box-active):hover .theme-box-title {
     font-family: 'Courier New', monospace;
     font-weight: 700;
@@ -581,6 +587,8 @@ body.theme-detroit {
   line-height: 1.25rem;
   font-weight: 600;
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, color 200ms ease;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 @media (min-width: 768px) {
@@ -616,5 +624,33 @@ body.theme-detroit {
 @media (max-width: 768px) {
   .gender-box-active {
     box-shadow: 0 0 10px color-mix(in srgb, var(--led-color) 28%, transparent);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .theme-box:active:not(.theme-box-active) .theme-box-title {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--led-color);
+    text-shadow:
+      0 0 6px var(--led-color),
+      0 0 14px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  .theme-box:active:not(.theme-box-active) {
+    border-color: color-mix(in srgb, var(--led-color) 45%, rgba(255, 255, 255, 0.18));
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 0 10px color-mix(in srgb, var(--led-color) 28%, transparent);
+  }
+
+  .gender-box:active:not(.gender-box-active) {
+    border-color: color-mix(in srgb, var(--led-color) 45%, rgba(255, 255, 255, 0.18));
+    color: var(--led-color);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 0 10px color-mix(in srgb, var(--led-color) 28%, transparent);
   }
 }
