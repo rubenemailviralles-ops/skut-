@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import ThemeBackground from './components/ThemeBackground';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import FlowRevealManager from './components/FlowRevealManager';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import SearchPage from './pages/SearchPage';
@@ -70,6 +71,7 @@ function App() {
         <div className="relative h-[100dvh] w-full overflow-hidden text-white bg-black">
           <ThemeBackground />
           <div ref={scrollContainerRef} className="relative z-10 app-scroll">
+            <FlowRevealManager rootRef={scrollContainerRef} watchKey={currentPage} />
             <Header currentPage={currentPage} onNavigate={setCurrentPage} />
             <main>
               {renderPage()}

@@ -57,7 +57,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         <div className="container mx-auto px-4 py-16">
           <button
             onClick={() => onNavigate('Shop')}
-            className={`${ledClass} led-border border-2 border-current bg-black/40 px-12 py-4 rounded-lg text-lg transition-all duration-300 hover:scale-105`}
+            className={`${ledClass} led-border border-2 border-current bg-black/40 px-12 py-4 rounded-lg text-lg transition-all duration-300 hover:scale-105 flow-item`}
           >
             SHOP MORE
           </button>

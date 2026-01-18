@@ -15,7 +15,7 @@ export default function HeroSection() {
   const getThemeButtonStyle = (themeId: ThemeType) => {
     const isActive = theme === themeId;
 
-    const baseStyle = 'px-4 py-3 md:px-8 md:py-6 rounded-lg font-bold text-sm md:text-lg transition-all duration-300 transform backdrop-blur-sm active:scale-[0.99]';
+    const baseStyle = 'px-4 py-3 md:px-8 md:py-6 rounded-lg font-bold text-sm md:text-lg transition-all duration-300 transform backdrop-blur-sm active:scale-[0.99] flow-item';
 
     switch (themeId) {
       case 'industrial':
@@ -106,7 +106,7 @@ export default function HeroSection() {
         <div className="flex gap-2 md:gap-3">
           <button
             onClick={() => setGender('male')}
-            className={`gender-box ${gender === 'male' ? 'gender-box-active' : ''}`}
+            className={`gender-box flow-item ${gender === 'male' ? 'gender-box-active' : ''}`}
             style={{ ['--led-color' as any]: genderLedColor.male }}
           >
             <span className="sr-only">Male</span>
@@ -114,7 +114,7 @@ export default function HeroSection() {
           </button>
           <button
             onClick={() => setGender('female')}
-            className={`gender-box ${gender === 'female' ? 'gender-box-active' : ''}`}
+            className={`gender-box flow-item ${gender === 'female' ? 'gender-box-active' : ''}`}
             style={{ ['--led-color' as any]: genderLedColor.female }}
           >
             <span className="sr-only">Female</span>

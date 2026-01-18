@@ -41,7 +41,7 @@ export default function TermsPage() {
           </p>
         </div>
 
-        <div className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg overflow-hidden`}>
+        <div className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg overflow-hidden flow-item`}>
           <div className={`bg-gradient-to-r ${colors.gradient} p-8 md:p-12`}>
             <div className="max-w-3xl mx-auto">
               <div className="text-sm text-gray-300 leading-relaxed space-y-6">
@@ -178,4 +178,3 @@ export default function TermsPage() {
     </div>
   );
 }
-

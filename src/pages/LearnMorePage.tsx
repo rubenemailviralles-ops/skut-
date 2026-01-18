@@ -90,7 +90,7 @@ export default function LearnMorePage() {
           {genres.map((genre, idx) => (
             <div
               key={idx}
-              className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300`}
+              className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 flow-item`}
             >
               <div className={`bg-gradient-to-r ${colors.gradient} p-8 md:p-12`}>
                 <div className="flex items-center mb-4">
@@ -127,7 +127,7 @@ export default function LearnMorePage() {
           ))}
         </div>
 
-        <div className={`mt-16 ${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-12 text-center`}>
+        <div className={`mt-16 ${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-12 text-center flow-item`}>
           <h2 className={`text-3xl font-bold text-white mb-6 ${colors.accent}`}>
             Experience the Sound
           </h2>

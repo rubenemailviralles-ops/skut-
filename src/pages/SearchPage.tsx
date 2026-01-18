@@ -122,7 +122,7 @@ export default function SearchPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className={`bg-black/60 border ${colors.border} ${colors.glow} rounded-lg p-4 md:p-6`}>
+        <div className={`bg-black/60 border ${colors.border} ${colors.glow} rounded-lg p-4 md:p-6 flow-item`}>
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-full bg-black/50 border ${colors.border}`}>
               <Search className="w-5 h-5 text-white" />
@@ -166,14 +166,14 @@ export default function SearchPage() {
             <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass} mb-5`}>On Sale</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {onSale.length === 0 ? (
-                <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400`}>
+                <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400 flow-item`}>
                   No on-sale items match your search.
                 </div>
               ) : (
                 onSale.slice(0, 12).map((p) => (
                   <div
                     key={p.id}
-                    className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99]`}
+                    className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99] flow-item`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -193,19 +193,19 @@ export default function SearchPage() {
           const list = byCategory.get(c) ?? [];
           if (activeCategory !== 'All' && activeCategory !== c) return null;
           return (
-            <section key={c} className="py-10 px-4 cv-auto">
+            <section key={c} className="py-10 px-4 cv-auto flow-item">
               <div className="container mx-auto">
                 <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass} mb-5`}>{c}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {list.length === 0 ? (
-                    <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400`}>
+                    <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400 flow-item`}>
                       No items match your search.
                     </div>
                   ) : (
                     list.slice(0, 9).map((p) => (
                       <div
                         key={p.id}
-                        className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99]`}
+                        className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99] flow-item`}
                       >
                         <div className={`text-lg font-bold ${ledClass}`}>{p.name}</div>
                         <div className="text-sm text-gray-400">{p.theme.toUpperCase()}</div>
@@ -221,4 +221,3 @@ export default function SearchPage() {
     </div>
   );
 }
-

@@ -66,7 +66,7 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
   const effectiveItemCount = isMobile ? Math.min(itemCount, 4) : itemCount;
 
   return (
-    <section className="py-12 px-4 cv-auto">
+    <section className="py-12 px-4 cv-auto flow-item">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass}`}>

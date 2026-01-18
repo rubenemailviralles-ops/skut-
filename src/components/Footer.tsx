@@ -34,7 +34,7 @@ export default function Footer() {
   return (
     <footer className={`bg-black/90 backdrop-blur-md theme-transition`}>
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 flow-item">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="mb-3 leading-none logo-container">

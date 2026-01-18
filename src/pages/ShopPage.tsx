@@ -37,7 +37,7 @@ export default function ShopPage() {
         return {
           accent: 'text-blue-400',
           border: 'border-blue-500/30',
-          card: 'hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:[animation:glitch-anim_0.28s_ease-in-out_infinite] transition-all duration-300'
+          card: 'hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300'
         };
     }
   };
@@ -85,7 +85,7 @@ export default function ShopPage() {
         <div className="container mx-auto px-4 mt-6">
           <button
             onClick={() => setShowAllCategories(true)}
-            className={`${theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue'} led-border border-2 border-current bg-black/40 w-full rounded-lg py-3 text-sm transition-transform duration-200 active:scale-[0.99]`}
+            className={`${theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue'} led-border border-2 border-current bg-black/40 w-full rounded-lg py-3 text-sm transition-transform duration-200 active:scale-[0.99] flow-item`}
           >
             Load More
           </button>
@@ -93,7 +93,7 @@ export default function ShopPage() {
       )}
 
       <div className="container mx-auto px-4 mt-16">
-        <div className={`bg-black/50 backdrop-blur-sm border ${colors.border} ${colors.card} rounded-lg p-12 text-center`}>
+        <div className={`bg-black/50 backdrop-blur-sm border ${colors.border} ${colors.card} rounded-lg p-12 text-center flow-item`}>
           <h2 className={`text-3xl font-bold text-white mb-4 ${colors.accent}`}>
             Coming Soon
           </h2>

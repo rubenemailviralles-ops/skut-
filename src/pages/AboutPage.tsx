@@ -52,7 +52,7 @@ export default function AboutPage() {
             { icon: Shirt, title: 'Premium Quality', text: 'High-end materials meet underground aesthetics' },
             { icon: Zap, title: 'Culture First', text: 'Authentic rave and festival wear for true enthusiasts' }
           ].map((item, idx) => (
-            <div key={idx} className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-8 text-center hover:scale-105 transition-transform duration-300`}>
+            <div key={idx} className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-8 text-center hover:scale-105 transition-transform duration-300 flow-item`}>
               <item.icon className={`w-12 h-12 ${colors.accent} mx-auto mb-4`} />
               <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
               <p className="text-gray-400">{item.text}</p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-12`}>
+        <div className={`${colors.bg} backdrop-blur-sm border ${colors.border} rounded-lg p-12 flow-item`}>
           <h2 className={`text-3xl font-bold text-white mb-6 ${colors.accent}`}>Our Story</h2>
           <div className="space-y-4 text-gray-300 leading-relaxed">
             <p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
             Stay connected with the underground. Get exclusive drops, event updates,
             and insider access to the SKUT community.
           </p>
-          <button className={`${colors.accent} border-2 ${colors.border} px-8 py-4 rounded-lg font-bold hover:scale-105 transition-transform duration-300`}>
+          <button className={`${colors.accent} border-2 ${colors.border} px-8 py-4 rounded-lg font-bold hover:scale-105 transition-transform duration-300 flow-item`}>
             Connect With Us
           </button>
         </div>
