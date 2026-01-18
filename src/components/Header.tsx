@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Menu, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 interface HeaderProps {
@@ -14,14 +14,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
   const { theme, setTheme, gender, setGender } = useTheme();
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
-  
-  useEffect(() => {
-    if (menuOpen) {
-      setMobileThemesOpen(true);
-    } else {
-      setMobileThemesOpen(false);
-    }
-  }, [menuOpen]);
 
   const getThemeColors = () => {
     switch (theme) {
@@ -162,7 +154,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
         <button
           className={`md:hidden ${colors.text}`}
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() =>
+            setMenuOpen((open) => {
+              const next = !open;
+              setMobileThemesOpen(next);
+              return next;
+            })
+          }
         >
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
