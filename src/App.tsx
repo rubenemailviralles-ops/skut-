@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeBackground from './components/ThemeBackground';
 import Header from './components/Header';
@@ -12,6 +12,7 @@ import { getThemeAssetUrls } from './lib/themeAssets';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('Home');
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const baseUrl = import.meta.env.BASE_URL;
 
   useEffect(() => {
@@ -37,6 +38,10 @@ function App() {
     });
   }, [baseUrl]);
 
+  useEffect(() => {
+    scrollContainerRef.current?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [currentPage]);
+
   const renderPage = () => {
     switch (currentPage) {
       case 'Home':
@@ -56,7 +61,7 @@ function App() {
     <ThemeProvider>
       <div className="relative h-[100dvh] w-full overflow-hidden text-white bg-black">
         <ThemeBackground />
-        <div className="relative z-10 app-scroll">
+        <div ref={scrollContainerRef} className="relative z-10 app-scroll">
           <Header currentPage={currentPage} onNavigate={setCurrentPage} />
           <main>
             {renderPage()}
