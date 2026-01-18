@@ -67,15 +67,24 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         <nav className="hidden md:flex items-center space-x-8 relative">
           {navItems.map((item) =>
             item === 'Shop' ? (
-              <div key={item} className="relative group flex items-center">
+              <div
+                key={item}
+                className="relative group flex items-center"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
                 <button
-                  onClick={() => onNavigate(item)}
+                  onClick={() => setDropdownOpen((open) => !open)}
                   className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
                 </button>
 
-                <div className={`absolute left-0 top-full mt-3 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-4`}>
+                <div
+                  className={`absolute left-0 top-full mt-3 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
+                    dropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  }`}
+                >
                   <div className="flex">
                     <div className="flex-1 px-4">
                       <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Themes</p>
@@ -86,6 +95,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             onClick={() => {
                               setTheme(t as any);
                               onNavigate('Shop');
+                              setDropdownOpen(false);
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
@@ -149,7 +159,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <div key={item}>
                   <button
                     onClick={() => {
-                      onNavigate('Shop');
                       setMobileThemesOpen((open) => !open);
                     }}
                     className={`text-left text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
@@ -166,9 +175,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             key={t}
                             onClick={() => {
                               setTheme(t as any);
-                              onNavigate('Shop');
                               setMobileThemesOpen(false);
                               setMenuOpen(false);
+                              onNavigate('Shop');
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80`
