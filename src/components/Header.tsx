@@ -83,7 +83,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                         {['industrial', 'psytrance', 'detroit'].map((t) => (
                           <button
                             key={t}
-                            onClick={() => setTheme(t as any)}
+                            onClick={() => {
+                              setTheme(t as any);
+                              onNavigate('Shop');
+                            }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
@@ -163,6 +166,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             onClick={() => {
                               setTheme(t as any);
                               setMobileThemesOpen(false);
+                              setMenuOpen(false);
+                              onNavigate('Shop');
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80`
