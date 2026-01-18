@@ -486,3 +486,64 @@ body.theme-detroit {
     filter: drop-shadow(0 0 6px currentColor) !important;
   }
 }
+
+.theme-box {
+  --led-color: #ffffff;
+}
+
+.theme-box-title {
+  transition: color 200ms ease, text-shadow 200ms ease, letter-spacing 200ms ease;
+}
+
+.theme-box-active .theme-box-title {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--led-color);
+  text-shadow:
+    0 0 6px var(--led-color),
+    0 0 14px rgba(0, 0, 0, 0.35),
+    0 0 22px color-mix(in srgb, var(--led-color) 55%, transparent);
+}
+
+.theme-box-active {
+  border-color: color-mix(in srgb, var(--led-color) 55%, rgba(255, 255, 255, 0.18));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 18px color-mix(in srgb, var(--led-color) 45%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-box:not(.theme-box-active):hover .theme-box-title {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--led-color);
+    text-shadow:
+      0 0 6px var(--led-color),
+      0 0 14px rgba(0, 0, 0, 0.35),
+      0 0 22px color-mix(in srgb, var(--led-color) 55%, transparent);
+  }
+
+  .theme-box:not(.theme-box-active):hover {
+    border-color: color-mix(in srgb, var(--led-color) 45%, rgba(255, 255, 255, 0.18));
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 0 14px color-mix(in srgb, var(--led-color) 35%, transparent);
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-box-active {
+    box-shadow: 0 0 10px color-mix(in srgb, var(--led-color) 28%, transparent);
+  }
+
+  .theme-box-active .theme-box-title {
+    letter-spacing: 0.1em;
+    text-shadow:
+      0 0 6px var(--led-color),
+      0 0 14px rgba(0, 0, 0, 0.35) !important;
+  }
+}

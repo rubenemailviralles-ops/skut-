@@ -38,6 +38,17 @@ export default function HeroSection() {
     }
   };
 
+  const getThemeLedColor = (themeId: ThemeType) => {
+    switch (themeId) {
+      case 'industrial':
+        return '#ef4444';
+      case 'psytrance':
+        return '#c084fc';
+      case 'detroit':
+        return '#60a5fa';
+    }
+  };
+
   const getGenderButtonStyle = (isActive: boolean) => {
     const accentColor = theme === 'industrial' ? 'red' : theme === 'psytrance' ? 'purple' : 'blue';
     return `px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-medium transition-all duration-300 ${
@@ -74,18 +85,22 @@ export default function HeroSection() {
           Select Your Vibe
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
-          {themes.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTheme(t.id)}
-              className={getThemeButtonStyle(t.id)}
-            >
-              <div className="text-center">
-                <div className="text-base md:text-xl font-bold mb-1 md:mb-2 leading-tight">{t.name}</div>
-                <div className="text-xs md:text-sm opacity-75">{t.description}</div>
-              </div>
-            </button>
-          ))}
+          {themes.map((t) => {
+            const isActive = theme === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setTheme(t.id)}
+                className={`${getThemeButtonStyle(t.id)} theme-box ${isActive ? 'theme-box-active' : ''}`}
+                style={{ ['--led-color' as any]: getThemeLedColor(t.id) }}
+              >
+                <div className="text-center">
+                  <div className="text-base md:text-xl font-bold mb-1 md:mb-2 leading-tight theme-box-title">{t.name}</div>
+                  <div className="text-xs md:text-sm opacity-75 theme-box-desc">{t.description}</div>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
