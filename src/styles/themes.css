@@ -534,6 +534,7 @@ body.theme-detroit {
   will-change: opacity;
   transition-property: opacity;
   transition-timing-function: ease;
+  transform: translateZ(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

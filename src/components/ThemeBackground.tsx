@@ -153,7 +153,7 @@ export default function ThemeBackground() {
   };
 
   return (
-    <div className="fixed inset-0 -z-10 theme-transition bg-crossfade">
+    <div className="fixed inset-0 -z-10 theme-transition bg-black bg-crossfade">
       {isCrossfading && previousTheme && previousTheme !== theme && (
         <div
           className="absolute inset-0 bg-crossfade-layer"
