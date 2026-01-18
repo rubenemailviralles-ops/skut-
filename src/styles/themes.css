@@ -563,10 +563,22 @@ body.theme-detroit {
   box-shadow: 0 0 12px var(--neon-color);
 }
 
+.neon-pictogram {
+  filter:
+    drop-shadow(0 0 5px currentColor)
+    drop-shadow(0 0 12px color-mix(in srgb, currentColor 45%, transparent));
+}
+
 @media (max-width: 768px) {
   .neon-divider-line,
   .neon-divider-vertical {
     box-shadow: 0 0 8px var(--neon-color);
+  }
+
+  .neon-pictogram {
+    filter:
+      drop-shadow(0 0 4px currentColor)
+      drop-shadow(0 0 10px color-mix(in srgb, currentColor 40%, transparent));
   }
 }
 

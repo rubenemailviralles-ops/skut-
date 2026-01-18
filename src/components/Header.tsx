@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Menu, Search, ShoppingCart, Twitter, X, Youtube } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import GenderPictogram from './GenderPictogram';
 
 interface HeaderProps {
   currentPage: string;
@@ -130,7 +131,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               gender === g ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
                           >
-                            {g.charAt(0).toUpperCase() + g.slice(1)}
+                            <span className="sr-only">{g.charAt(0).toUpperCase() + g.slice(1)}</span>
+                            <GenderPictogram
+                              variant={g as any}
+                              className="w-5 h-5 neon-pictogram"
+                              style={{ color: neonColor }}
+                            />
                           </button>
                         ))}
                       </div>
@@ -253,7 +259,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                                   : `${ledClass} opacity-80`
                               }`}
                             >
-                              {g.charAt(0).toUpperCase() + g.slice(1)}
+                              <span className="sr-only">{g.charAt(0).toUpperCase() + g.slice(1)}</span>
+                              <GenderPictogram
+                                variant={g as any}
+                                className="w-4 h-4 neon-pictogram"
+                                style={{ color: neonColor }}
+                              />
                             </button>
                             {idx === 0 && (
                               <div className="h-5 neon-divider-vertical" style={{ ['--neon-color' as any]: neonColor }} />

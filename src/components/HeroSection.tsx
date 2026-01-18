@@ -1,5 +1,6 @@
 import { useTheme } from '../context/ThemeContext';
 import { ThemeType } from '../types';
+import GenderPictogram from './GenderPictogram';
 
 export default function HeroSection() {
   const { theme, setTheme, gender, setGender } = useTheme();
@@ -108,14 +109,16 @@ export default function HeroSection() {
             className={`gender-box ${gender === 'male' ? 'gender-box-active' : ''}`}
             style={{ ['--led-color' as any]: genderLedColor.male }}
           >
-            Male
+            <span className="sr-only">Male</span>
+            <GenderPictogram variant="male" className="w-5 h-5 neon-pictogram" style={{ color: 'var(--led-color)' }} />
           </button>
           <button
             onClick={() => setGender('female')}
             className={`gender-box ${gender === 'female' ? 'gender-box-active' : ''}`}
             style={{ ['--led-color' as any]: genderLedColor.female }}
           >
-            Female
+            <span className="sr-only">Female</span>
+            <GenderPictogram variant="female" className="w-5 h-5 neon-pictogram" style={{ color: 'var(--led-color)' }} />
           </button>
         </div>
       </div>
