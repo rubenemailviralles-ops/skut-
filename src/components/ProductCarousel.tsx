@@ -93,7 +93,7 @@ export default function ProductCarousel({ category, itemCount = 6 }: ProductCaro
           ))}
         </div>
 
-        <div className="mt-5 flex justify-center gap-3">
+        <div className="mt-5 flex justify-end md:justify-center gap-3">
           <button
             onClick={() => scroll('left')}
             className={`p-3 md:p-2 rounded-full bg-black/50 border ${colors.accent} ${colors.hover} transition-all md:hover:scale-110 active:scale-[0.98]`}
