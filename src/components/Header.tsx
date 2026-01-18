@@ -9,7 +9,8 @@ interface HeaderProps {
 
 export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownPinned, setDropdownPinned] = useState(false);
+  const [dropdownHover, setDropdownHover] = useState(false);
   const [mobileThemesOpen, setMobileThemesOpen] = useState(false);
   const { theme, setTheme, gender, setGender } = useTheme();
   const ledClass = theme === 'industrial' ? 'led-light-red' : theme === 'psytrance' ? 'led-light-purple' : 'led-light-blue';
@@ -42,6 +43,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
   const colors = getThemeColors();
   const navItems = ['Home', 'Shop', 'About Us', 'Learn More'];
+  const shopDropdownVisible = dropdownPinned || dropdownHover;
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md border-b ${colors.border} theme-transition`}>
@@ -70,11 +72,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <div
                 key={item}
                 className="relative group flex items-center"
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
+                onMouseEnter={() => setDropdownHover(true)}
+                onMouseLeave={() => setDropdownHover(false)}
               >
                 <button
-                  onClick={() => setDropdownOpen((open) => !open)}
+                  onClick={() =>
+                    setDropdownPinned((pinned) => {
+                      const next = !pinned;
+                      if (!next) setDropdownHover(false);
+                      return next;
+                    })
+                  }
                   className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                 >
                   {item.toUpperCase()}
@@ -82,7 +90,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
                 <div
                   className={`absolute left-0 top-full mt-3 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
-                    dropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    shopDropdownVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                 >
                   <div className="flex">
@@ -95,7 +103,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             onClick={() => {
                               setTheme(t as any);
                               onNavigate('Shop');
-                              setDropdownOpen(false);
+                              setDropdownPinned(false);
+                              setDropdownHover(false);
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
