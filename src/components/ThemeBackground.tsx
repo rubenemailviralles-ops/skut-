@@ -27,7 +27,7 @@ export default function ThemeBackground() {
     psytrance: false,
     detroit: false,
   });
-  const baseUrl = import.meta.env.BASE_URL;
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
   const crossfadeDurationMs = lowPowerMode ? 220 : 420;
 
   useEffect(() => {
@@ -68,6 +68,7 @@ export default function ThemeBackground() {
     const loadImage = (src: string) =>
       new Promise<void>((resolve, reject) => {
         const img = new Image();
+        (img as any).decoding = 'async';
         img.onload = () => resolve();
         img.onerror = () => reject(new Error('image_load_failed'));
         img.src = src;
@@ -85,8 +86,12 @@ export default function ThemeBackground() {
             await loadImage(main);
             setIndustrialUseFallback(false);
           } catch {
-            await loadImage(fallback);
-            setIndustrialUseFallback(true);
+            try {
+              await loadImage(fallback);
+              setIndustrialUseFallback(true);
+            } catch {
+              setIndustrialUseFallback(true);
+            }
           }
           setLoadedThemes((prev) => ({ ...prev, industrial: true }));
           return;
@@ -99,8 +104,12 @@ export default function ThemeBackground() {
             await loadImage(main);
             setDetroitUseFallback(false);
           } catch {
-            await loadImage(fallback);
-            setDetroitUseFallback(true);
+            try {
+              await loadImage(fallback);
+              setDetroitUseFallback(true);
+            } catch {
+              setDetroitUseFallback(true);
+            }
           }
           setLoadedThemes((prev) => ({ ...prev, detroit: true }));
           return;
@@ -112,8 +121,12 @@ export default function ThemeBackground() {
           await loadImage(main);
           setPsytranceUseFallback(false);
         } catch {
-          await loadImage(fallback);
-          setPsytranceUseFallback(true);
+          try {
+            await loadImage(fallback);
+            setPsytranceUseFallback(true);
+          } catch {
+            setPsytranceUseFallback(true);
+          }
         }
         setLoadedThemes((prev) => ({ ...prev, psytrance: true }));
       } finally {
@@ -123,11 +136,18 @@ export default function ThemeBackground() {
 
     void ensureThemeLoaded(theme);
 
+    if (!lowPowerMode) {
+      void ensureThemeLoaded('industrial');
+      void ensureThemeLoaded('psytrance');
+      void ensureThemeLoaded('detroit');
+      return;
+    }
+
     const timer = window.setTimeout(() => {
       void ensureThemeLoaded('industrial');
       window.setTimeout(() => void ensureThemeLoaded('psytrance'), 500);
       window.setTimeout(() => void ensureThemeLoaded('detroit'), 1000);
-    }, lowPowerMode ? 650 : 250);
+    }, 650);
 
     return () => window.clearTimeout(timer);
   }, [baseUrl, lowPowerMode, theme]);
