@@ -489,6 +489,23 @@ body.theme-detroit {
 
 .theme-box {
   --led-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.18) 55%, rgba(0, 0, 0, 0.32) 100%),
+    radial-gradient(circle at 30% 35%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 55%);
+  pointer-events: none;
+}
+
+.theme-box > * {
+  position: relative;
+  z-index: 1;
 }
 
 .theme-box-title {
@@ -536,6 +553,11 @@ body.theme-detroit {
 }
 
 @media (max-width: 768px) {
+  .theme-box::before {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.22) 60%, rgba(0, 0, 0, 0.38) 100%) !important;
+  }
+
   .theme-box-active {
     box-shadow: 0 0 10px color-mix(in srgb, var(--led-color) 28%, transparent);
   }
