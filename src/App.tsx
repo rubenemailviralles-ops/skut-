@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeBackground from './components/ThemeBackground';
 import Header from './components/Header';
@@ -7,9 +7,35 @@ import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import AboutPage from './pages/AboutPage';
 import LearnMorePage from './pages/LearnMorePage';
+import { preloadImages, preloadFont, runWhenIdle } from './lib/preload';
+import { getThemeAssetUrls } from './lib/themeAssets';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('Home');
+  const baseUrl = import.meta.env.BASE_URL;
+
+  useEffect(() => {
+    runWhenIdle(() => {
+      const connection = (navigator as any).connection;
+      const saveData = Boolean(connection?.saveData);
+      const isSlow =
+        typeof connection?.effectiveType === 'string' &&
+        (connection.effectiveType.includes('2g') || connection.effectiveType.includes('slow-2g'));
+      if (!saveData && !isSlow) {
+        const urls = getThemeAssetUrls(baseUrl);
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) {
+          void preloadImages(urls.slice(0, 4));
+          window.setTimeout(() => void preloadImages(urls), 6000);
+        } else {
+          void preloadImages(urls);
+        }
+      }
+      void preloadFont('BraveGates');
+      void preloadFont('Audiowide');
+      void preloadFont('BoldMoves');
+    });
+  }, [baseUrl]);
 
   const renderPage = () => {
     switch (currentPage) {
