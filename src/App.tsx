@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
+import SearchPage from './pages/SearchPage';
 import AboutPage from './pages/AboutPage';
 import LearnMorePage from './pages/LearnMorePage';
 import { preloadImages, preloadFont, runWhenIdle } from './lib/preload';
@@ -48,6 +49,8 @@ function App() {
         return <HomePage onNavigate={setCurrentPage} />;
       case 'Shop':
         return <ShopPage />;
+      case 'Search':
+        return <SearchPage />;
       case 'About Us':
         return <AboutPage />;
       case 'Learn More':
