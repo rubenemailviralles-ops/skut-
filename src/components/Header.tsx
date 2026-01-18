@@ -89,7 +89,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 </button>
 
                 <div
-                  className={`absolute left-0 top-full mt-3 w-56 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
+                  className={`absolute left-0 top-full mt-3 w-72 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
                     shopDropdownVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                 >
@@ -106,7 +106,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                               setDropdownPinned(false);
                               setDropdownHover(false);
                             }}
-                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
+                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
                           >
@@ -125,7 +125,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                           <button
                             key={g}
                             onClick={() => setGender(g as any)}
-                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
+                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
                               gender === g ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
                             }`}
                           >
