@@ -526,6 +526,22 @@ body.theme-detroit {
     0 0 22px color-mix(in srgb, var(--led-color) 55%, transparent);
 }
 
+.bg-crossfade {
+  isolation: isolate;
+}
+
+.bg-crossfade-layer {
+  will-change: opacity;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-crossfade-layer {
+    transition: none !important;
+  }
+}
+
 .theme-box-active {
   border-color: color-mix(in srgb, var(--led-color) 55%, rgba(255, 255, 255, 0.18));
   box-shadow:

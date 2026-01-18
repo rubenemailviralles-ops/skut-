@@ -1,5 +1,6 @@
 import { useTheme } from '../context/ThemeContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ThemeType } from '../types';
 
 export default function ThemeBackground() {
   const { theme } = useTheme();
@@ -8,7 +9,12 @@ export default function ThemeBackground() {
   const [psytranceUseFallback, setPsytranceUseFallback] = useState(false);
   const [detroitUseFallback, setDetroitUseFallback] = useState(false);
   const [lowPowerMode, setLowPowerMode] = useState(false);
+  const [previousTheme, setPreviousTheme] = useState<ThemeType | null>(null);
+  const [isCrossfading, setIsCrossfading] = useState(false);
+  const [previousOpacity, setPreviousOpacity] = useState(1);
+  const currentThemeRef = useRef<ThemeType>(theme);
   const baseUrl = import.meta.env.BASE_URL;
+  const crossfadeDurationMs = lowPowerMode ? 220 : 420;
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
@@ -41,6 +47,26 @@ export default function ThemeBackground() {
   }, [theme]);
 
   useEffect(() => {
+    if (currentThemeRef.current === theme) return;
+
+    setPreviousTheme(currentThemeRef.current);
+    setPreviousOpacity(1);
+    setIsCrossfading(true);
+    currentThemeRef.current = theme;
+
+    const raf = window.requestAnimationFrame(() => setPreviousOpacity(0));
+    const timer = window.setTimeout(() => {
+      setIsCrossfading(false);
+      setPreviousTheme(null);
+    }, crossfadeDurationMs);
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+    };
+  }, [crossfadeDurationMs, theme]);
+
+  useEffect(() => {
     if (theme !== 'industrial') return;
 
     setIndustrialUseFallback(false);
@@ -60,9 +86,9 @@ export default function ThemeBackground() {
     img.src = `${baseUrl}detroit-underground.jpg`;
   }, [baseUrl, theme]);
 
-  return (
-    <div className="fixed inset-0 -z-10 theme-transition">
-      {theme === 'industrial' && (
+  const renderTheme = (t: ThemeType) => {
+    if (t === 'industrial') {
+      return (
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat industrial-bg"
           style={{
@@ -86,9 +112,11 @@ export default function ThemeBackground() {
             </>
           )}
         </div>
-      )}
+      );
+    }
 
-      {theme === 'psytrance' && (
+    if (t === 'psytrance') {
+      return (
         <div className="w-full h-full bg-cover bg-center bg-no-repeat psytrance-bg">
           <img
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -106,21 +134,37 @@ export default function ThemeBackground() {
             </>
           )}
         </div>
-      )}
+      );
+    }
 
-      {theme === 'detroit' && (
+    return (
+      <div
+        className="w-full h-full bg-cover bg-center bg-no-repeat detroit-bg"
+        style={{
+          backgroundImage: `url(${baseUrl}${detroitUseFallback ? '15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp' : 'detroit-underground.jpg'})`,
+        }}
+      >
+        <div className="detroit-overlay" />
+        <div className="detroit-grid" />
+        {!lowPowerMode && <div className="detroit-noise" />}
+        <div className="detroit-vignette" />
+      </div>
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 -z-10 theme-transition bg-crossfade">
+      {isCrossfading && previousTheme && previousTheme !== theme && (
         <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat detroit-bg"
-          style={{
-            backgroundImage: `url(${baseUrl}${detroitUseFallback ? '15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp' : 'detroit-underground.jpg'})`,
-          }}
+          className="absolute inset-0 bg-crossfade-layer"
+          style={{ opacity: previousOpacity, transitionDuration: `${crossfadeDurationMs}ms` }}
         >
-          <div className="detroit-overlay" />
-          <div className="detroit-grid" />
-          {!lowPowerMode && <div className="detroit-noise" />}
-          <div className="detroit-vignette" />
+          {renderTheme(previousTheme)}
         </div>
       )}
+      <div className="absolute inset-0 bg-crossfade-layer" style={{ transitionDuration: `${crossfadeDurationMs}ms` }}>
+        {renderTheme(theme)}
+      </div>
     </div>
   );
 }
