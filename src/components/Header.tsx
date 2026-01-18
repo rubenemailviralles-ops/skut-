@@ -194,6 +194,20 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
 
           <button
+            onClick={() => {
+              onNavigate('Home');
+              setMenuOpen(false);
+              setMobileThemesOpen(false);
+            }}
+            className={`${ledClass} led-icon transition-all duration-300 active:scale-[0.99] ${
+              currentPage === 'Home' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-100'
+            }`}
+            aria-label="Home"
+          >
+            <Home className="w-6 h-6" />
+          </button>
+
+          <button
             className={colors.text}
             onClick={() =>
               setMenuOpen((open) => {
