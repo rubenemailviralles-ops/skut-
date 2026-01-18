@@ -150,8 +150,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <button
                   key="Search"
                   onClick={() => onNavigate('Search')}
-                  className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
-                    currentPage === 'Search' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                  className={`${ledClass} led-icon transition-all duration-300 hover:scale-110 ${
+                    currentPage === 'Search' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-80 hover:opacity-100'
                   }`}
                   aria-label="Search"
                 >
