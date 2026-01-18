@@ -44,7 +44,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   const colors = getThemeColors();
-  const navItems = ['Home', 'Shop', 'About Us', 'Learn More', 'Terms'];
+  const navItems = ['Shop', 'About Us', 'Learn More', 'Terms'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
   const showHomeInMobileMenu = currentPage !== 'Home';
   const isHomePage = currentPage === 'Home';
@@ -71,143 +71,145 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </span>
         </button>
 
-        <nav className="hidden md:flex items-center space-x-8 relative">
-          {navItems.map((item) =>
-            item === 'Shop' ? (
-              <div
-                key={item}
-                className="relative group flex items-center"
-                onMouseEnter={() => setDropdownHover(true)}
-                onMouseLeave={() => setDropdownHover(false)}
+        <nav className="hidden md:flex items-center">
+          <div className="flex items-center gap-3">
+            <div
+              className="transition-all duration-300"
+              style={{
+                opacity: isSearchPage ? 0 : 1,
+                transform: isSearchPage ? 'translateY(-2px)' : undefined,
+                pointerEvents: isSearchPage ? 'none' : 'auto',
+              }}
+            >
+              <button
+                onClick={() => onNavigate('Search')}
+                className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
+                  isSearchPage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                }`}
+                aria-label="Search"
               >
-                <button
-                  onClick={() =>
-                    setDropdownPinned((pinned) => {
-                      const next = !pinned;
-                      if (!next) setDropdownHover(false);
-                      return next;
-                    })
-                  }
-                  className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-                >
-                  {item.toUpperCase()}
-                </button>
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
 
+            <div
+              className="transition-all duration-300"
+              style={{
+                opacity: isHomePage ? 0 : 1,
+                transform: isHomePage ? 'translateY(-2px)' : undefined,
+                pointerEvents: isHomePage ? 'none' : 'auto',
+              }}
+            >
+              <button
+                onClick={() => onNavigate('Home')}
+                className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
+                  isHomePage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                }`}
+                aria-label="Home"
+              >
+                <Home className="w-5 h-5" />
+              </button>
+            </div>
+
+            <button
+              className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100`}
+              aria-label="Cart"
+            >
+              <ShoppingCart className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-8 ml-10 relative">
+            {navItems.map((item) =>
+              item === 'Shop' ? (
                 <div
-                  className={`absolute left-0 top-full mt-3 w-72 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
-                    shopDropdownVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  key={item}
+                  className="relative group flex items-center"
+                  onMouseEnter={() => setDropdownHover(true)}
+                  onMouseLeave={() => setDropdownHover(false)}
+                >
+                  <button
+                    onClick={() =>
+                      setDropdownPinned((pinned) => {
+                        const next = !pinned;
+                        if (!next) setDropdownHover(false);
+                        return next;
+                      })
+                    }
+                    className={`text-sm leading-none transition-opacity ${ledClass} ${
+                      currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                    }`}
+                  >
+                    {item.toUpperCase()}
+                  </button>
+
+                  <div
+                    className={`absolute left-0 top-full mt-3 w-72 ${colors.bg} border ${colors.border} rounded-lg shadow-lg transition-all duration-200 py-4 ${
+                      shopDropdownVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    }`}
+                  >
+                    <div className="flex">
+                      <div className="flex-1 px-4">
+                        <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Themes</p>
+                        <div className="space-y-2">
+                          {['industrial', 'psytrance', 'detroit'].map((t) => (
+                            <button
+                              key={t}
+                              onClick={() => {
+                                setTheme(t as any);
+                                onNavigate('Shop');
+                                setDropdownPinned(false);
+                                setDropdownHover(false);
+                              }}
+                              className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
+                                theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
+                              }`}
+                            >
+                              {t.charAt(0).toUpperCase() + t.slice(1)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="self-stretch neon-divider-vertical" style={{ ['--neon-color' as any]: neonColor }} />
+
+                      <div className="flex-1 px-4">
+                        <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Gender</p>
+                        <div className="space-y-2">
+                          {['male', 'female'].map((g) => (
+                            <button
+                              key={g}
+                              onClick={() => setGender(g as any)}
+                              className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
+                                gender === g ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
+                              }`}
+                            >
+                              <span className="sr-only">{g.charAt(0).toUpperCase() + g.slice(1)}</span>
+                              <GenderPictogram
+                                variant={g as any}
+                                className="w-5 h-5 neon-pictogram"
+                                style={{ color: neonColor }}
+                              />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  key={item}
+                  onClick={() => onNavigate(item)}
+                  className={`text-sm leading-none transition-opacity ${ledClass} ${
+                    currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'
                   }`}
                 >
-                  <div className="flex">
-                    <div className="flex-1 px-4">
-                      <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Themes</p>
-                      <div className="space-y-2">
-                        {['industrial', 'psytrance', 'detroit'].map((t) => (
-                          <button
-                            key={t}
-                            onClick={() => {
-                              setTheme(t as any);
-                              onNavigate('Shop');
-                              setDropdownPinned(false);
-                              setDropdownHover(false);
-                            }}
-                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
-                              theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
-                            }`}
-                          >
-                            {t.charAt(0).toUpperCase() + t.slice(1)}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="self-stretch neon-divider-vertical" style={{ ['--neon-color' as any]: neonColor }} />
-
-                    <div className="flex-1 px-4">
-                      <p className={`text-xs mb-3 uppercase ${ledClass} opacity-80`}>Gender</p>
-                      <div className="space-y-2">
-                        {['male', 'female'].map((g) => (
-                          <button
-                            key={g}
-                            onClick={() => setGender(g as any)}
-                            className={`w-full text-left text-sm px-3 py-2 rounded transition-colors whitespace-nowrap ${
-                              gender === g ? `${ledClass} bg-white/10` : `${ledClass} opacity-80 hover:opacity-100`
-                            }`}
-                          >
-                            <span className="sr-only">{g.charAt(0).toUpperCase() + g.slice(1)}</span>
-                            <GenderPictogram
-                              variant={g as any}
-                              className="w-5 h-5 neon-pictogram"
-                              style={{ color: neonColor }}
-                            />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : item === 'About Us' ? (
-              <span key={item} className="contents">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="transition-all duration-300"
-                    style={{
-                      opacity: isSearchPage ? 0 : 1,
-                      transform: isSearchPage ? 'translateY(-2px)' : undefined,
-                      pointerEvents: isSearchPage ? 'none' : 'auto',
-                    }}
-                  >
-                    <button
-                      onClick={() => onNavigate('Search')}
-                      className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
-                        isSearchPage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-                      }`}
-                      aria-label="Search"
-                    >
-                      <Search className="w-5 h-5" />
-                    </button>
-                  </div>
-
-                  <div
-                    className="transition-all duration-300"
-                    style={{
-                      opacity: isHomePage ? 0 : 1,
-                      transform: isHomePage ? 'translateY(-2px)' : undefined,
-                      pointerEvents: isHomePage ? 'none' : 'auto',
-                    }}
-                  >
-                    <button
-                      onClick={() => onNavigate('Home')}
-                      className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
-                        isHomePage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-                      }`}
-                      aria-label="Home"
-                    >
-                      <Home className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-                <button
-                  onClick={() => onNavigate(item)}
-                  className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-                >
                   {item.toUpperCase()}
                 </button>
-              </span>
-            ) : (
-              <button
-                key={item}
-                onClick={() => onNavigate(item)}
-                className={`text-sm leading-none transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-              >
-                {item.toUpperCase()}
-              </button>
-            )
-          )}
-          <button className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110`}>
-            <ShoppingCart className="w-5 h-5" />
-          </button>
+              )
+            )}
+          </div>
         </nav>
 
         <div className="md:hidden flex items-center gap-3">
