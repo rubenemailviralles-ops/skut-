@@ -528,6 +528,8 @@ body.theme-detroit {
 
 .bg-crossfade {
   isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .bg-crossfade-layer {

@@ -54,13 +54,15 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen text-white overflow-x-hidden">
+      <div className="relative min-h-screen text-white overflow-x-hidden bg-black">
         <ThemeBackground />
-        <Header currentPage={currentPage} onNavigate={setCurrentPage} />
-        <main className="relative z-10">
-          {renderPage()}
-        </main>
-        <Footer />
+        <div className="relative z-10">
+          <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+          <main>
+            {renderPage()}
+          </main>
+          <Footer />
+        </div>
       </div>
     </ThemeProvider>
   );
