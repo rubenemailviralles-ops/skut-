@@ -226,7 +226,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       <div className="neon-divider-line" style={{ ['--neon-color' as any]: neonColor }} />
 
       {menuOpen && (
-        <div className={`md:hidden ${colors.bg} backdrop-blur-md`}>
+        <div className={`md:hidden ${colors.bg} backdrop-blur-md max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain`}>
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <div
               className={`transition-all duration-300 overflow-hidden ${
@@ -307,6 +307,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     </div>
                   )}
                 </div>
+              ) : item === 'Terms' ? (
+                <button
+                  key={item}
+                  onClick={() => {
+                    onNavigate(item);
+                    setMenuOpen(false);
+                  }}
+                  className={`text-left text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+                >
+                  TERMS & CONDITIONS
+                </button>
               ) : (
                 <button
                   key={item}
