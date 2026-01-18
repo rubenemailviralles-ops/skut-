@@ -149,7 +149,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <div key={item}>
                   <button
                     onClick={() => {
-                      setMobileThemesOpen(!mobileThemesOpen);
+                      onNavigate('Shop');
+                      setMobileThemesOpen((open) => !open);
                     }}
                     className={`text-left text-sm transition-opacity ${ledClass} ${currentPage === item ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
                   >
@@ -165,9 +166,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                             key={t}
                             onClick={() => {
                               setTheme(t as any);
+                              onNavigate('Shop');
                               setMobileThemesOpen(false);
                               setMenuOpen(false);
-                              onNavigate('Shop');
                             }}
                             className={`w-full text-left text-sm px-3 py-2 rounded transition-colors ${
                               theme === t ? `${ledClass} bg-white/10` : `${ledClass} opacity-80`
