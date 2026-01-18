@@ -47,6 +47,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const navItems = ['Home', 'Shop', 'About Us', 'Learn More', 'Terms'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
   const showHomeInMobileMenu = currentPage !== 'Home';
+  const isHomePage = currentPage === 'Home';
+  const isSearchPage = currentPage === 'Search';
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition`}>
@@ -147,16 +149,47 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </div>
             ) : item === 'About Us' ? (
               <>
-                <button
-                  key="Search"
-                  onClick={() => onNavigate('Search')}
-                  className={`${ledClass} led-icon transition-all duration-300 hover:scale-110 ${
-                    currentPage === 'Search' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-80 hover:opacity-100'
-                  }`}
-                  aria-label="Search"
-                >
-                  <Search className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-3">
+                  <div
+                    className="transition-all duration-300"
+                    style={{
+                      opacity: isSearchPage ? 0 : 1,
+                      transform: isSearchPage ? 'translateY(-2px)' : undefined,
+                      pointerEvents: isSearchPage ? 'none' : 'auto',
+                    }}
+                  >
+                    <button
+                      key="Search"
+                      onClick={() => onNavigate('Search')}
+                      className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
+                        isSearchPage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                      }`}
+                      aria-label="Search"
+                    >
+                      <Search className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  <div
+                    className="transition-all duration-300"
+                    style={{
+                      opacity: isHomePage ? 0 : 1,
+                      transform: isHomePage ? 'translateY(-2px)' : undefined,
+                      pointerEvents: isHomePage ? 'none' : 'auto',
+                    }}
+                  >
+                    <button
+                      key="HomeIcon"
+                      onClick={() => onNavigate('Home')}
+                      className={`${ledClass} led-icon transition-transform duration-200 hover:scale-110 ${
+                        isHomePage ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+                      }`}
+                      aria-label="Home"
+                    >
+                      <Home className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
                 <button
                   key={item}
                   onClick={() => onNavigate(item)}
@@ -181,33 +214,47 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         </nav>
 
         <div className="md:hidden flex items-center gap-3">
-          <button
-            onClick={() => {
-              onNavigate('Search');
-              setMenuOpen(false);
-              setMobileThemesOpen(false);
+          <div
+            className="transition-all duration-300"
+            style={{
+              opacity: isSearchPage ? 0 : 1,
+              transform: isSearchPage ? 'translateY(-2px)' : undefined,
+              pointerEvents: isSearchPage ? 'none' : 'auto',
             }}
-            className={`${ledClass} led-icon transition-all duration-300 active:scale-[0.99] ${
-              currentPage === 'Search' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-100'
-            }`}
-            aria-label="Search"
           >
-            <Search className="w-6 h-6" />
-          </button>
+            <button
+              onClick={() => {
+                onNavigate('Search');
+                setMenuOpen(false);
+                setMobileThemesOpen(false);
+              }}
+              className={`${ledClass} led-icon transition-transform duration-200 active:scale-[0.99]`}
+              aria-label="Search"
+            >
+              <Search className="w-6 h-6" />
+            </button>
+          </div>
 
-          <button
-            onClick={() => {
-              onNavigate('Home');
-              setMenuOpen(false);
-              setMobileThemesOpen(false);
+          <div
+            className="transition-all duration-300"
+            style={{
+              opacity: isHomePage ? 0 : 1,
+              transform: isHomePage ? 'translateY(-2px)' : undefined,
+              pointerEvents: isHomePage ? 'none' : 'auto',
             }}
-            className={`${ledClass} led-icon transition-all duration-300 active:scale-[0.99] ${
-              currentPage === 'Home' ? 'opacity-0 pointer-events-none -translate-y-0.5' : 'opacity-100'
-            }`}
-            aria-label="Home"
           >
-            <Home className="w-6 h-6" />
-          </button>
+            <button
+              onClick={() => {
+                onNavigate('Home');
+                setMenuOpen(false);
+                setMobileThemesOpen(false);
+              }}
+              className={`${ledClass} led-icon transition-transform duration-200 active:scale-[0.99]`}
+              aria-label="Home"
+            >
+              <Home className="w-6 h-6" />
+            </button>
+          </div>
 
           <button
             className={colors.text}
