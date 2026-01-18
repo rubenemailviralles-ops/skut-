@@ -12,9 +12,27 @@ export default function ThemeBackground() {
   const [previousTheme, setPreviousTheme] = useState<ThemeType | null>(null);
   const [isCrossfading, setIsCrossfading] = useState(false);
   const [previousOpacity, setPreviousOpacity] = useState(1);
+  const [currentOpacity, setCurrentOpacity] = useState(1);
+  const [loadedThemes, setLoadedThemes] = useState<Record<ThemeType, boolean>>({
+    industrial: false,
+    psytrance: false,
+    detroit: false,
+  });
+  const loadedThemesRef = useRef(loadedThemes);
   const currentThemeRef = useRef<ThemeType>(theme);
+  const transitionTimerRef = useRef<number | null>(null);
+  const transitionRafRef = useRef<number | null>(null);
+  const preloadInFlightRef = useRef<Record<ThemeType, boolean>>({
+    industrial: false,
+    psytrance: false,
+    detroit: false,
+  });
   const baseUrl = import.meta.env.BASE_URL;
   const crossfadeDurationMs = lowPowerMode ? 220 : 420;
+
+  useEffect(() => {
+    loadedThemesRef.current = loadedThemes;
+  }, [loadedThemes]);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
@@ -47,44 +65,114 @@ export default function ThemeBackground() {
   }, [theme]);
 
   useEffect(() => {
-    if (currentThemeRef.current === theme) return;
+    const loadImage = (src: string) =>
+      new Promise<void>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('image_load_failed'));
+        img.src = src;
+      });
 
-    setPreviousTheme(currentThemeRef.current);
-    setPreviousOpacity(1);
-    setIsCrossfading(true);
-    currentThemeRef.current = theme;
+    const ensureThemeLoaded = async (t: ThemeType) => {
+      if (loadedThemesRef.current[t] || preloadInFlightRef.current[t]) return;
+      preloadInFlightRef.current[t] = true;
 
-    const raf = window.requestAnimationFrame(() => setPreviousOpacity(0));
-    const timer = window.setTimeout(() => {
-      setIsCrossfading(false);
-      setPreviousTheme(null);
-    }, crossfadeDurationMs);
+      try {
+        if (t === 'industrial') {
+          const main = `${baseUrl}industrial-warehouse.jpg`;
+          const fallback = `${baseUrl}image.jpg`;
+          try {
+            await loadImage(main);
+            setIndustrialUseFallback(false);
+          } catch {
+            await loadImage(fallback);
+            setIndustrialUseFallback(true);
+          }
+          setLoadedThemes((prev) => ({ ...prev, industrial: true }));
+          return;
+        }
 
-    return () => {
-      window.cancelAnimationFrame(raf);
-      window.clearTimeout(timer);
+        if (t === 'detroit') {
+          const main = `${baseUrl}detroit-underground.jpg`;
+          const fallback = `${baseUrl}15-hidden-techno-clubs-in-los-angeles-that-locals-love.webp`;
+          try {
+            await loadImage(main);
+            setDetroitUseFallback(false);
+          } catch {
+            await loadImage(fallback);
+            setDetroitUseFallback(true);
+          }
+          setLoadedThemes((prev) => ({ ...prev, detroit: true }));
+          return;
+        }
+
+        const main = `${baseUrl}psytrance-stage.jpg`;
+        const fallback = `${baseUrl}best-psytrance-festivals.jpg`;
+        try {
+          await loadImage(main);
+          setPsytranceUseFallback(false);
+        } catch {
+          await loadImage(fallback);
+          setPsytranceUseFallback(true);
+        }
+        setLoadedThemes((prev) => ({ ...prev, psytrance: true }));
+      } finally {
+        preloadInFlightRef.current[t] = false;
+      }
     };
-  }, [crossfadeDurationMs, theme]);
+
+    void ensureThemeLoaded(theme);
+
+    const timer = window.setTimeout(() => {
+      void ensureThemeLoaded('industrial');
+      window.setTimeout(() => void ensureThemeLoaded('psytrance'), 500);
+      window.setTimeout(() => void ensureThemeLoaded('detroit'), 1000);
+    }, lowPowerMode ? 650 : 250);
+
+    return () => window.clearTimeout(timer);
+  }, [baseUrl, lowPowerMode, theme]);
 
   useEffect(() => {
-    if (theme !== 'industrial') return;
+    if (currentThemeRef.current === theme) {
+      setCurrentOpacity(1);
+      return;
+    }
 
-    setIndustrialUseFallback(false);
-    const img = new Image();
-    img.onload = () => setIndustrialUseFallback(false);
-    img.onerror = () => setIndustrialUseFallback(true);
-    img.src = `${baseUrl}industrial-warehouse.jpg`;
-  }, [baseUrl, theme]);
+    if (transitionTimerRef.current) window.clearTimeout(transitionTimerRef.current);
+    if (transitionRafRef.current) window.cancelAnimationFrame(transitionRafRef.current);
 
-  useEffect(() => {
-    if (theme !== 'detroit') return;
+    const from = currentThemeRef.current;
+    setPreviousTheme(from);
+    setPreviousOpacity(1);
+    setCurrentOpacity(0);
+    setIsCrossfading(true);
 
-    setDetroitUseFallback(false);
-    const img = new Image();
-    img.onload = () => setDetroitUseFallback(false);
-    img.onerror = () => setDetroitUseFallback(true);
-    img.src = `${baseUrl}detroit-underground.jpg`;
-  }, [baseUrl, theme]);
+    const startFade = () => {
+      transitionRafRef.current = window.requestAnimationFrame(() => {
+        setCurrentOpacity(1);
+        setPreviousOpacity(0);
+      });
+
+      transitionTimerRef.current = window.setTimeout(() => {
+        setIsCrossfading(false);
+        setPreviousTheme(null);
+        currentThemeRef.current = theme;
+      }, crossfadeDurationMs);
+    };
+
+    if (loadedThemes[theme]) {
+      startFade();
+      return;
+    }
+
+    const waitTimer = window.setInterval(() => {
+      if (!loadedThemes[theme]) return;
+      window.clearInterval(waitTimer);
+      startFade();
+    }, 50);
+
+    return () => window.clearInterval(waitTimer);
+  }, [crossfadeDurationMs, loadedThemes, theme]);
 
   const renderTheme = (t: ThemeType) => {
     if (t === 'industrial') {
@@ -121,6 +209,7 @@ export default function ThemeBackground() {
           <img
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             src={`${baseUrl}${psytranceUseFallback ? 'best-psytrance-festivals.jpg' : 'psytrance-stage.jpg'}`}
+            onLoad={() => setLoadedThemes((prev) => ({ ...prev, psytrance: true }))}
             onError={() => setPsytranceUseFallback(true)}
             alt=""
           />
@@ -162,7 +251,10 @@ export default function ThemeBackground() {
           {renderTheme(previousTheme)}
         </div>
       )}
-      <div className="absolute inset-0 bg-crossfade-layer" style={{ transitionDuration: `${crossfadeDurationMs}ms` }}>
+      <div
+        className="absolute inset-0 bg-crossfade-layer"
+        style={{ opacity: isCrossfading ? currentOpacity : 1, transitionDuration: `${crossfadeDurationMs}ms` }}
+      >
         {renderTheme(theme)}
       </div>
     </div>
