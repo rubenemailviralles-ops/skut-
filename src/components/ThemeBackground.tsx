@@ -239,15 +239,12 @@ export default function ThemeBackground() {
               <div className="industrial-noise" />
               <div className="industrial-glitch-layer" />
               <div className="industrial-fog" />
-              <div className="industrial-fog" style={{ animationDelay: '10s', opacity: 0.5 }} />
               <div
                 ref={strobeRef}
                 className="industrial-strobe"
                 style={{ '--x': '50%', '--y': '50%' } as any}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/10 to-black/50 animate-pulse" />
-              <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 blur-3xl rounded-full animate-pulse" />
-              <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-600/10 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
             </>
           )}
         </div>
@@ -270,7 +267,6 @@ export default function ThemeBackground() {
               <div className="psytrance-mandala" />
               <div className="psytrance-vortex" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
               <div className="psytrance-liquid" style={{ top: '20%', left: '20%' }} />
-              <div className="psytrance-liquid" style={{ bottom: '20%', right: '20%', animationDelay: '4s' }} />
             </>
           )}
         </div>

@@ -156,7 +156,7 @@ body.theme-detroit {
   width: 200%;
   height: 200%;
   background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.1"/%3E%3C/svg%3E');
-  animation: noise-anim 0.5s infinite;
+  animation: none;
   pointer-events: none;
   opacity: 0.15;
   mix-blend-mode: overlay;
@@ -209,8 +209,8 @@ body.theme-detroit {
   width: 400px;
   height: 400px;
   background: linear-gradient(45deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
-  animation: liquid-morph 8s ease-in-out infinite, rotate 20s linear infinite;
-  filter: blur(40px);
+  animation: liquid-morph 12s ease-in-out infinite;
+  filter: blur(26px);
   pointer-events: none;
   mix-blend-mode: screen;
 }
