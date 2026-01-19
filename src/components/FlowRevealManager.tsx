@@ -14,7 +14,7 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
     if (!supportsIO) return;
 
     const maxRatio = 0.3;
-    const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
+    const thresholds = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3];
     const pending = new Map<HTMLElement, number>();
     let rafId: number | null = null;
 

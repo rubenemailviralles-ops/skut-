@@ -681,6 +681,30 @@ body.theme-detroit {
   }
 }
 
+html.is-scrolling .backdrop-blur-sm,
+html.is-scrolling .backdrop-blur-md,
+html.is-scrolling .backdrop-blur-lg {
+  backdrop-filter: none !important;
+}
+
+html.is-scrolling .theme-transition {
+  transition: none !important;
+}
+
+html.is-scrolling .industrial-fog,
+html.is-scrolling .industrial-noise,
+html.is-scrolling .industrial-strobe,
+html.is-scrolling .psytrance-mandala,
+html.is-scrolling .psytrance-vortex,
+html.is-scrolling .psytrance-liquid,
+html.is-scrolling .detroit-noise {
+  animation-play-state: paused !important;
+}
+
+html.is-scrolling .industrial-strobe {
+  opacity: 0 !important;
+}
+
 .theme-box-active {
   border-color: color-mix(in srgb, var(--led-color) 55%, rgba(255, 255, 255, 0.18));
   box-shadow:
