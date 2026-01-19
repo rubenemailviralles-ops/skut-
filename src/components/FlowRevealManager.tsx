@@ -13,34 +13,49 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
     const supportsIO = typeof window !== 'undefined' && 'IntersectionObserver' in window;
     if (!supportsIO) return;
 
-    const enterRatio = 0.3;
-    const exitRatio = 0.25;
+    const maxRatio = 0.3;
+    const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
+    const pending = new Map<HTMLElement, number>();
+    let rafId: number | null = null;
+
+    const flush = () => {
+      rafId = null;
+      for (const [el, ratio] of pending) {
+        const progress = Math.max(0, Math.min(1, ratio / maxRatio));
+        el.style.setProperty('--flow-p', String(progress));
+      }
+      pending.clear();
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
-          const current = el.dataset.flowIn === '1';
-          const next =
-            entry.intersectionRatio >= enterRatio ? true : entry.intersectionRatio <= exitRatio ? false : current;
-          const nextValue = next ? '1' : '0';
-          if (el.dataset.flowIn !== nextValue) el.dataset.flowIn = nextValue;
+          pending.set(el, entry.intersectionRatio);
         }
+        if (rafId) return;
+        rafId = window.requestAnimationFrame(flush);
       },
       {
         root: rootEl,
-        threshold: [0, 0.3, 1],
+        threshold: thresholds,
       }
     );
 
     const observeNode = (node: Node) => {
       if (!(node instanceof HTMLElement)) return;
-      if (node.classList.contains('flow-item')) observer.observe(node);
-      node.querySelectorAll?.('.flow-item').forEach((el) => observer.observe(el));
+      if (node.classList.contains('flow-item')) {
+        if (!node.style.getPropertyValue('--flow-p')) node.style.setProperty('--flow-p', '0');
+        observer.observe(node);
+      }
+      node.querySelectorAll?.<HTMLElement>('.flow-item').forEach((el) => {
+        if (!el.style.getPropertyValue('--flow-p')) el.style.setProperty('--flow-p', '0');
+        observer.observe(el);
+      });
     };
 
     rootEl.querySelectorAll<HTMLElement>('.flow-item').forEach((el) => {
-      if (!el.dataset.flowIn) el.dataset.flowIn = '0';
+      if (!el.style.getPropertyValue('--flow-p')) el.style.setProperty('--flow-p', '0');
       observer.observe(el);
     });
 
@@ -55,6 +70,7 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
     return () => {
       mutation.disconnect();
       observer.disconnect();
+      if (rafId) window.cancelAnimationFrame(rafId);
     };
   }, [rootRef, watchKey]);
 
