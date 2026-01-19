@@ -78,7 +78,7 @@ export default function HeroSection() {
       </div>
 
       <div className="mb-3 md:mb-8 w-full max-w-4xl">
-        <h2 className={`text-lg md:text-3xl mb-2 md:mb-6 text-center ${ledClass} flow-item`}>
+        <h2 className={`text-2xl md:text-4xl mb-2 md:mb-6 text-center tracking-wide ${ledClass}`}>
           Select Your Vibe
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
@@ -102,7 +102,7 @@ export default function HeroSection() {
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-3 md:mb-8">
-        <span className={`text-xs md:text-sm ${ledClass} flow-item`}>FILTER:</span>
+        <span className={`text-xs md:text-sm tracking-wide ${ledClass}`}>FILTER:</span>
         <div className="flex gap-2 md:gap-3">
           <button
             onClick={() => setGender('male')}
