@@ -653,7 +653,7 @@ body.theme-detroit {
   will-change: opacity, transform;
 }
 
-.flow-item.flow-in {
+.flow-item[data-flow-in='1'] {
   opacity: 1;
   transform: translateY(0);
 }

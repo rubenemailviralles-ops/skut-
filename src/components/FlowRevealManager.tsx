@@ -17,8 +17,8 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
       (entries) => {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
-          if (entry.intersectionRatio >= 0.22) el.classList.add('flow-in');
-          else el.classList.remove('flow-in');
+          if (entry.intersectionRatio >= 0.22) el.dataset.flowIn = '1';
+          else el.dataset.flowIn = '0';
         }
       },
       {
@@ -33,7 +33,10 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
       node.querySelectorAll?.('.flow-item').forEach((el) => observer.observe(el));
     };
 
-    rootEl.querySelectorAll('.flow-item').forEach((el) => observer.observe(el));
+    rootEl.querySelectorAll<HTMLElement>('.flow-item').forEach((el) => {
+      if (!el.dataset.flowIn) el.dataset.flowIn = '0';
+      observer.observe(el);
+    });
 
     const mutation = new MutationObserver((mutations) => {
       for (const m of mutations) {
