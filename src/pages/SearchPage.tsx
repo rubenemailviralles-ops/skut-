@@ -161,19 +161,19 @@ export default function SearchPage() {
       </div>
 
       <div className="relative z-10">
-        <section className="py-10 px-4 cv-auto">
+        <section className="py-10 px-4 cv-auto flow-item">
           <div className="container mx-auto">
             <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass} mb-5`}>On Sale</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {onSale.length === 0 ? (
-                <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400 flow-item`}>
+                <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400`}>
                   No on-sale items match your search.
                 </div>
               ) : (
                 onSale.slice(0, 12).map((p) => (
                   <div
                     key={p.id}
-                    className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99] flow-item`}
+                    className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99]`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -198,14 +198,14 @@ export default function SearchPage() {
                 <h2 className={`text-3xl md:text-4xl tracking-wide ${ledClass} mb-5`}>{c}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {list.length === 0 ? (
-                    <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400 flow-item`}>
+                    <div className={`col-span-full bg-black/50 border ${colors.border} rounded-lg p-8 text-center text-gray-400`}>
                       No items match your search.
                     </div>
                   ) : (
                     list.slice(0, 9).map((p) => (
                       <div
                         key={p.id}
-                        className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99] flow-item`}
+                        className={`rounded-lg border ${colors.border} bg-black/50 p-5 transition-transform duration-200 active:scale-[0.99]`}
                       >
                         <div className={`text-lg font-bold ${ledClass}`}>{p.name}</div>
                         <div className="text-sm text-gray-400">{p.theme.toUpperCase()}</div>

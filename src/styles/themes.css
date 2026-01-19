@@ -648,14 +648,14 @@ body.theme-detroit {
 
 .flow-item {
   opacity: 0;
-  transform: translate3d(0, 16px, 0);
+  transform: translate3d(0, 16px, 0) scale(0.99);
   transition: opacity 320ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.2, 1);
   contain: layout paint;
 }
 
 .flow-item[data-flow-in='1'] {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 @media (max-width: 768px) {
@@ -668,6 +668,11 @@ body.theme-detroit {
     filter:
       drop-shadow(0 0 4px currentColor)
       drop-shadow(0 0 10px color-mix(in srgb, currentColor 40%, transparent));
+  }
+
+  .flow-item {
+    transform: translate3d(0, 22px, 0) scale(0.985);
+    transition: opacity 360ms ease, transform 440ms cubic-bezier(0.2, 0.9, 0.2, 1);
   }
 }
 

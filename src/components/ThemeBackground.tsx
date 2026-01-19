@@ -4,7 +4,6 @@ import { ThemeType } from '../types';
 
 export default function ThemeBackground() {
   const { theme } = useTheme();
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const [industrialUseFallback, setIndustrialUseFallback] = useState(false);
   const [psytranceUseFallback, setPsytranceUseFallback] = useState(false);
   const [detroitUseFallback, setDetroitUseFallback] = useState(false);
@@ -27,6 +26,9 @@ export default function ThemeBackground() {
     psytrance: false,
     detroit: false,
   });
+  const strobeRef = useRef<HTMLDivElement | null>(null);
+  const mouseRafRef = useRef<number | null>(null);
+  const pendingMouseRef = useRef({ x: 50, y: 50 });
   const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
   const crossfadeDurationMs = lowPowerMode ? 220 : 420;
 
@@ -50,14 +52,25 @@ export default function ThemeBackground() {
     if (lowPowerMode) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
+      pendingMouseRef.current = {
         x: (e.clientX / window.innerWidth) * 100,
         y: (e.clientY / window.innerHeight) * 100,
+      };
+      if (mouseRafRef.current) return;
+      mouseRafRef.current = window.requestAnimationFrame(() => {
+        mouseRafRef.current = null;
+        if (!strobeRef.current) return;
+        strobeRef.current.style.setProperty('--x', `${pendingMouseRef.current.x}%`);
+        strobeRef.current.style.setProperty('--y', `${pendingMouseRef.current.y}%`);
       });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (mouseRafRef.current) window.cancelAnimationFrame(mouseRafRef.current);
+      mouseRafRef.current = null;
+    };
   }, [lowPowerMode]);
 
   useEffect(() => {
@@ -211,8 +224,9 @@ export default function ThemeBackground() {
               <div className="industrial-fog" />
               <div className="industrial-fog" style={{ animationDelay: '10s', opacity: 0.5 }} />
               <div
+                ref={strobeRef}
                 className="industrial-strobe"
-                style={{ '--x': `${mousePos.x}%`, '--y': `${mousePos.y}%` } as any}
+                style={{ '--x': '50%', '--y': '50%' } as any}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/10 to-black/50 animate-pulse" />
               <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 blur-3xl rounded-full animate-pulse" />
