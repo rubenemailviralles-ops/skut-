@@ -687,8 +687,7 @@ body.theme-detroit {
 .theme-box-active {
   border-color: color-mix(in srgb, var(--led-color) 55%, rgba(255, 255, 255, 0.18));
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-    0 0 18px color-mix(in srgb, var(--led-color) 45%, transparent);
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 }
 
 @media (hover: hover) and (pointer: fine) {

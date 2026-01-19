@@ -21,19 +21,19 @@ export default function HeroSection() {
       case 'industrial':
         return `${baseStyle} ${
           isActive
-            ? 'bg-red-600/30 border-2 border-red-500 text-red-400 shadow-lg shadow-red-500/50'
+            ? 'bg-red-600/30 border-2 border-red-500 text-red-400'
             : 'bg-gray-900/50 border-2 border-gray-700 text-gray-400 md:hover:border-red-500/50 md:hover:text-red-400'
         }`;
       case 'psytrance':
         return `${baseStyle} ${
           isActive
-            ? 'bg-purple-600/30 border-2 border-purple-500 text-purple-300 shadow-lg shadow-purple-500/50'
+            ? 'bg-purple-600/30 border-2 border-purple-500 text-purple-300'
             : 'bg-gray-900/50 border-2 border-gray-700 text-gray-400 md:hover:border-purple-500/50 md:hover:text-purple-300'
         }`;
       case 'detroit':
         return `${baseStyle} ${
           isActive
-            ? 'bg-blue-600/30 border-2 border-blue-500 text-blue-300 shadow-lg shadow-blue-500/50'
+            ? 'bg-blue-600/30 border-2 border-blue-500 text-blue-300'
             : 'bg-gray-900/50 border-2 border-gray-700 text-gray-400 md:hover:border-blue-500/50 md:hover:text-blue-300'
         }`;
     }
