@@ -33,21 +33,21 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           text: 'text-red-500',
           hover: 'hover:text-red-400',
           border: 'border-red-500/30',
-          bg: 'bg-black/80'
+          bg: 'bg-black/85'
         };
       case 'psytrance':
         return {
           text: 'text-purple-400',
           hover: 'hover:text-pink-400',
           border: 'border-purple-500/30',
-          bg: 'bg-black/80'
+          bg: 'bg-black/85'
         };
       case 'detroit':
         return {
           text: 'text-blue-400',
           hover: 'hover:text-purple-400',
           border: 'border-blue-500/30',
-          bg: 'bg-black/80'
+          bg: 'bg-black/85'
         };
     }
   };

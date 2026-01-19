@@ -19,6 +19,14 @@ html.menu-open .app-scroll {
   overflow: hidden !important;
 }
 
+@media (min-width: 769px) {
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+  }
+}
+
 html.low-power .backdrop-blur-sm,
 html.low-power .backdrop-blur-md,
 html.low-power .backdrop-blur-lg {
