@@ -370,12 +370,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             willChange: 'transform, opacity',
           }}
         >
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
-            <div
-              className={`transition-all duration-300 overflow-hidden ${
-                showHomeInMobileMenu ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-              }`}
-            >
+          <nav className="container mx-auto px-4 pt-1 pb-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
+            {showHomeInMobileMenu && (
               <button
                 onClick={() => {
                   onNavigate('Home');
@@ -387,7 +383,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <Home className="w-4 h-4 mr-2" />
                 HOME
               </button>
-            </div>
+            )}
             {navItems.filter((item) => item !== 'Home').map((item) =>
               item === 'Shop' ? (
                 <div key={item}>
