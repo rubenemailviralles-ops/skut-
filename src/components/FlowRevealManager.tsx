@@ -13,12 +13,18 @@ export default function FlowRevealManager({ rootRef, watchKey }: FlowRevealManag
     const supportsIO = typeof window !== 'undefined' && 'IntersectionObserver' in window;
     if (!supportsIO) return;
 
+    const enterRatio = 0.3;
+    const exitRatio = 0.25;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
-          if (entry.intersectionRatio >= 0.3) el.dataset.flowIn = '1';
-          else el.dataset.flowIn = '0';
+          const current = el.dataset.flowIn === '1';
+          const next =
+            entry.intersectionRatio >= enterRatio ? true : entry.intersectionRatio <= exitRatio ? false : current;
+          const nextValue = next ? '1' : '0';
+          if (el.dataset.flowIn !== nextValue) el.dataset.flowIn = nextValue;
         }
       },
       {
