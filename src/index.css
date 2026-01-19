@@ -19,6 +19,12 @@ html.menu-open .app-scroll {
   overflow: hidden !important;
 }
 
+html.low-power .backdrop-blur-sm,
+html.low-power .backdrop-blur-md,
+html.low-power .backdrop-blur-lg {
+  backdrop-filter: none !important;
+}
+
 .app-scroll {
   height: 100%;
   overflow-y: auto;

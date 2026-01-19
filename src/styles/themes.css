@@ -681,6 +681,16 @@ body.theme-detroit {
   }
 }
 
+html.low-power .theme-transition {
+  transition: none !important;
+}
+
+html.low-power .led-light-red,
+html.low-power .led-light-purple,
+html.low-power .led-light-blue {
+  animation: none !important;
+}
+
 html.is-scrolling .backdrop-blur-sm,
 html.is-scrolling .backdrop-blur-md,
 html.is-scrolling .backdrop-blur-lg {

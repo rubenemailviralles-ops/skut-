@@ -38,14 +38,31 @@ export default function ThemeBackground() {
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
-    const update = () => setLowPowerMode(mq.matches);
+    const reducedMotionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const update = () => {
+      const deviceMemory = Number((navigator as any).deviceMemory ?? 8);
+      const cores = Number(navigator.hardwareConcurrency ?? 8);
+      setLowPowerMode(mq.matches || reducedMotionMq.matches || deviceMemory <= 4 || cores <= 4);
+    };
+
     update();
+
     if ('addEventListener' in mq) {
       mq.addEventListener('change', update);
-      return () => mq.removeEventListener('change', update);
+      reducedMotionMq.addEventListener('change', update);
+      return () => {
+        mq.removeEventListener('change', update);
+        reducedMotionMq.removeEventListener('change', update);
+      };
     }
+
     mq.addListener(update);
-    return () => mq.removeListener(update);
+    reducedMotionMq.addListener(update);
+    return () => {
+      mq.removeListener(update);
+      reducedMotionMq.removeListener(update);
+    };
   }, []);
 
   useEffect(() => {

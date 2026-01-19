@@ -47,6 +47,40 @@ function App() {
   }, [currentPage]);
 
   useEffect(() => {
+    const root = document.documentElement;
+    const reducedMotionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mq = window.matchMedia('(max-width: 768px)');
+
+    const compute = () => {
+      const deviceMemory = Number((navigator as any).deviceMemory ?? 8);
+      const cores = Number(navigator.hardwareConcurrency ?? 8);
+      const lowPower = mq.matches || reducedMotionMq.matches || deviceMemory <= 4 || cores <= 4;
+      if (lowPower) root.classList.add('low-power');
+      else root.classList.remove('low-power');
+    };
+
+    compute();
+
+    if ('addEventListener' in reducedMotionMq) {
+      reducedMotionMq.addEventListener('change', compute);
+      mq.addEventListener('change', compute);
+      return () => {
+        reducedMotionMq.removeEventListener('change', compute);
+        mq.removeEventListener('change', compute);
+        root.classList.remove('low-power');
+      };
+    }
+
+    reducedMotionMq.addListener(compute);
+    mq.addListener(compute);
+    return () => {
+      reducedMotionMq.removeListener(compute);
+      mq.removeListener(compute);
+      root.classList.remove('low-power');
+    };
+  }, []);
+
+  useEffect(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
 
