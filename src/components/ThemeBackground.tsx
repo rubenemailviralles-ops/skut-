@@ -167,10 +167,13 @@ export default function ThemeBackground() {
     void ensureThemeLoaded(theme);
 
     if (!lowPowerMode) {
-      void ensureThemeLoaded('industrial');
-      void ensureThemeLoaded('psytrance');
-      void ensureThemeLoaded('detroit');
-      return;
+      const timers: number[] = [];
+      const otherThemes = (['industrial', 'psytrance', 'detroit'] as ThemeType[]).filter((t) => t !== theme);
+      timers.push(window.setTimeout(() => void ensureThemeLoaded(otherThemes[0]), 1200));
+      timers.push(window.setTimeout(() => void ensureThemeLoaded(otherThemes[1]), 3000));
+      return () => {
+        timers.forEach((t) => window.clearTimeout(t));
+      };
     }
 
     const timer = window.setTimeout(() => {
@@ -257,6 +260,8 @@ export default function ThemeBackground() {
           <img
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             src={`${baseUrl}${psytranceUseFallback ? 'best-psytrance-festivals.jpg' : 'psytrance-stage.jpg'}`}
+            loading="eager"
+            fetchPriority="high"
             onLoad={() => setLoadedThemes((prev) => ({ ...prev, psytrance: true }))}
             onError={() => setPsytranceUseFallback(true)}
             alt=""

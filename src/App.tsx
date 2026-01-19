@@ -33,7 +33,9 @@ function App() {
           void preloadImages(urls.slice(0, 4));
           window.setTimeout(() => void preloadImages(urls), 6000);
         } else {
-          void preloadImages(urls);
+          void preloadImages(urls.slice(0, 2));
+          window.setTimeout(() => void preloadImages(urls.slice(2, 4)), 2000);
+          window.setTimeout(() => void preloadImages(urls.slice(4)), 5000);
         }
       }
       void preloadFont('BraveGates');
