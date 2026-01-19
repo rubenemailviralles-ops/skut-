@@ -55,7 +55,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const colors = getThemeColors();
   const navItems = ['Shop', 'About Us', 'Learn More', 'Terms'];
   const shopDropdownVisible = dropdownPinned || dropdownHover;
-  const showHomeInMobileMenu = currentPage !== 'Home';
   const isHomePage = currentPage === 'Home';
   const isSearchPage = currentPage === 'Search';
 
@@ -67,6 +66,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     }
     cartHideTimerRef.current = window.setTimeout(() => setCartRendered(false), 180);
   }, [cartItemCount]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (menuOpen) root.classList.add('menu-open');
+    else root.classList.remove('menu-open');
+    return () => root.classList.remove('menu-open');
+  }, [menuOpen]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${colors.bg} backdrop-blur-md theme-transition relative`}>
@@ -371,20 +377,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           }}
         >
           <nav className="container mx-auto px-4 pt-1 pb-4 flex flex-col space-y-4 max-h-[calc(100dvh-5.25rem)] overflow-y-auto overscroll-contain">
-            {showHomeInMobileMenu && (
-              <button
-                onClick={() => {
-                  onNavigate('Home');
-                  setMenuOpen(false);
-                  setMobileThemesOpen(false);
-                }}
-                className={`text-left text-sm transition-opacity ${ledClass} flex items-center`}
-              >
-                <Home className="w-4 h-4 mr-2" />
-                HOME
-              </button>
-            )}
-            {navItems.filter((item) => item !== 'Home').map((item) =>
+            {navItems.map((item) =>
               item === 'Shop' ? (
                 <div key={item}>
                   <button
