@@ -412,6 +412,14 @@ body.theme-detroit {
   text-transform: uppercase;
 }
 
+@media (min-width: 769px) {
+  .led-light-red,
+  .led-light-purple,
+  .led-light-blue {
+    animation: none;
+  }
+}
+
 .led-border {
   border-color: currentColor;
   box-shadow:
@@ -699,6 +707,12 @@ html.is-scrolling .backdrop-blur-lg {
 
 html.is-scrolling .theme-transition {
   transition: none !important;
+}
+
+html.is-scrolling .led-light-red,
+html.is-scrolling .led-light-purple,
+html.is-scrolling .led-light-blue {
+  animation: none !important;
 }
 
 html.is-scrolling .industrial-fog,

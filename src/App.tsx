@@ -39,8 +39,6 @@ function App() {
         }
       }
       void preloadFont('BraveGates');
-      void preloadFont('Audiowide');
-      void preloadFont('BoldMoves');
     });
   }, [baseUrl]);
 
