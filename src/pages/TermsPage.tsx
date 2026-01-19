@@ -9,22 +9,22 @@ export default function TermsPage() {
         return {
           accent: 'text-red-500',
           border: 'border-red-500/30',
-          bg: 'bg-red-950/20',
-          gradient: 'from-red-950/40 to-transparent'
+          bg: 'bg-red-950/65 md:bg-red-950/20',
+          gradient: 'from-red-950/75 md:from-red-950/40 to-transparent'
         };
       case 'psytrance':
         return {
           accent: 'text-purple-400',
           border: 'border-purple-500/30',
-          bg: 'bg-purple-950/20',
-          gradient: 'from-purple-950/40 to-transparent'
+          bg: 'bg-purple-950/65 md:bg-purple-950/20',
+          gradient: 'from-purple-950/75 md:from-purple-950/40 to-transparent'
         };
       case 'detroit':
         return {
           accent: 'text-blue-400',
           border: 'border-blue-500/30',
-          bg: 'bg-blue-950/20',
-          gradient: 'from-blue-950/40 to-transparent'
+          bg: 'bg-blue-950/65 md:bg-blue-950/20',
+          gradient: 'from-blue-950/75 md:from-blue-950/40 to-transparent'
         };
     }
   };
